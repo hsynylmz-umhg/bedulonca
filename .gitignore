@@ -1,0 +1,21 @@
+# Ortam Değişkenleri — asla repoya atma
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Sanal Ortam
+venv/
+env/
+.venv/
+
+# IDE & İşletim Sistemi
+.vscode/
+.idea/
+.DS_Store
+
+# Streamlit Cache
+.streamlit/
