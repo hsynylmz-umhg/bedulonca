@@ -56,13 +56,12 @@ def cost_agent(state: AgentState) -> dict:
             inflation_adj_cost = round(cost_price * (1 + inflation_pct), 2)
 
             # Depo maliyeti: bu SKU'nun stok payı oranında
-            stock_share        = stock_qty / total_stock
-            warehouse_cost     = round(warehouse_monthly * stock_share, 2)
+            stock_share            = stock_qty / total_stock
+            warehouse_cost_total   = warehouse_monthly * stock_share
+            warehouse_cost         = round(warehouse_cost_total / stock_qty, 2)  # BİRİM BAŞI
 
             # Toplam maliyet (satış başına)
-            total_cost = round(
-                inflation_adj_cost + cargo_cost + commission_cost + warehouse_cost, 2
-            )
+            total_cost = round(inflation_adj_cost + cargo_cost + commission_cost + warehouse_cost, 2)
 
             # --- Kırmızı Çizgi ---
             # min_margin_pct hedef marjı koruyarak minimum satış fiyatı
@@ -97,7 +96,7 @@ def cost_agent(state: AgentState) -> dict:
                 "inflation_adj_cost_tl": inflation_adj_cost,
                 "cargo_cost_tl":        cargo_cost,
                 "commission_cost_tl":   commission_cost,
-                "warehouse_cost_tl":    warehouse_cost,
+                "warehouse_cost_tl":     warehouse_cost,   # birim başı
                 "total_cost_tl":        total_cost,
                 # Kırmızı çizgi
                 "red_line_price_tl":    red_line_price,

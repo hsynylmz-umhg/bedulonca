@@ -1,0 +1,86 @@
+{
+  "products": [
+    {
+      "sku": "MSI-RAIDER-GE78-RTX4080",
+      "name": "MSI Raider GE78 HX RTX 4080",
+      "category": "gaming_laptop",
+      "our_price_tl": 89999,
+      "cost_price_tl": 72000,
+      "stock_qty": 4,
+      "weight_kg": 3.1,
+      "desi": 18,
+      "tags": ["high-end", "4K-gaming", "content-creation"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/MSI_Logo.svg/320px-MSI_Logo.svg.png"
+    },
+    {
+      "sku": "SSD-2TB-SAMSUNG-990PRO",
+      "name": "Samsung 990 Pro 2TB NVMe",
+      "category": "storage",
+      "our_price_tl": 4199,
+      "cost_price_tl": 3100,
+      "stock_qty": 23,
+      "weight_kg": 0.1,
+      "desi": 1,
+      "tags": ["high-stock", "bundle-candidate", "gaming-essential"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/320px-Samsung_Logo.svg.png"
+    },
+    {
+      "sku": "MOUSE-RAZER-DEATHADDER-V3",
+      "name": "Razer DeathAdder V3 HyperSpeed",
+      "category": "peripheral",
+      "our_price_tl": 2299,
+      "cost_price_tl": 1550,
+      "stock_qty": 11,
+      "weight_kg": 0.09,
+      "desi": 2,
+      "tags": ["high-margin", "bundle-candidate", "esports"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4e/Razer_logo.svg/320px-Razer_logo.svg.png"
+    }
+  ],
+
+  "competitors": [
+    {
+      "name": "GameGaraj",
+      "listings": [
+        { "sku": "MSI-RAIDER-GE78-RTX4080",  "price_tl": 91500, "stock": "var" },
+        { "sku": "SSD-2TB-SAMSUNG-990PRO",    "price_tl": 4299,  "stock": "var" },
+        { "sku": "MOUSE-RAZER-DEATHADDER-V3", "price_tl": 2399,  "stock": "yok" }
+      ]
+    },
+    {
+      "name": "ITopya",
+      "listings": [
+        { "sku": "MSI-RAIDER-GE78-RTX4080",  "price_tl": 88999, "stock": "var" },
+        { "sku": "SSD-2TB-SAMSUNG-990PRO",    "price_tl": 4099,  "stock": "var" },
+        { "sku": "MOUSE-RAZER-DEATHADDER-V3", "price_tl": 2249,  "stock": "var" }
+      ]
+    }
+  ],
+
+  "market_config": {
+    "marketplace_commission_pct": 8.5,
+    "cargo_base_tl": 45,
+    "cargo_per_desi_tl": 12,
+    "monthly_inflation_pct": 2.8,
+    "warehouse_monthly_cost_tl": 15000,
+    "min_margin_pct": 12.0
+  },
+
+  "trends": {
+    "hot_games": ["Elden Ring 2", "Battlefield 6", "Cyberpunk 2078"],
+    "recommended_hardware": {
+      "Battlefield 6":  ["GPU: RTX 4080+", "RAM: 32GB", "SSD: 2TB NVMe"],
+      "Cyberpunk 2078": ["GPU: RTX 4090",  "RAM: 64GB", "SSD: 2TB NVMe"]
+    },
+    "trending_skus": ["SSD-2TB-SAMSUNG-990PRO", "MSI-RAIDER-GE78-RTX4080"]
+  },
+
+  "sales_history": [
+    { "ay": "Aralık 2024", "net_kar_tl": 41200, "enflasyon_yuzdesi": 2.5 },
+    { "ay": "Ocak 2025",   "net_kar_tl": 38700, "enflasyon_yuzdesi": 2.6 },
+    { "ay": "Şubat 2025",  "net_kar_tl": 43500, "enflasyon_yuzdesi": 2.7 },
+    { "ay": "Mart 2025",   "net_kar_tl": 51800, "enflasyon_yuzdesi": 2.9 },
+    { "ay": "Nisan 2025",  "net_kar_tl": 49300, "enflasyon_yuzdesi": 2.8 },
+    { "ay": "Mayıs 2025",  "net_kar_tl": 57600, "enflasyon_yuzdesi": 3.1 }
+  ]
+}

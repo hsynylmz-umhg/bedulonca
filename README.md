@@ -1,4 +1,4 @@
-# ⚡ Bedülonca (Artış Teşkilatı)
+# ⚡ Bedülonca
 
 **Otonom Kâr Marjı Optimizasyonu ve Dinamik Fiyatlandırma Ajanı**  
 *BTK Akademi, Google & Girvak AI Hackathon 2026 Başvurusu*
@@ -39,7 +39,7 @@ Sistem doğrusal bir StateGraph mimarisinde, paylaşılan bir bellek (`AgentStat
 
 ---
 
-## ⚙️ Kurulum (Jüri İçin)
+## ⚙️ Kurulum
 
 ```bash
 # 1. Repoyu klonla
