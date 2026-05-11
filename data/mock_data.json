@@ -4,7 +4,7 @@
       "sku": "MSI-RAIDER-GE78-RTX4080",
       "name": "MSI Raider GE78 HX RTX 4080",
       "category": "gaming_laptop",
-      "our_price_tl": 89999,
+      "our_price_tl": 79999,
       "cost_price_tl": 72000,
       "stock_qty": 4,
       "weight_kg": 3.1,
@@ -16,9 +16,9 @@
       "sku": "SSD-2TB-SAMSUNG-990PRO",
       "name": "Samsung 990 Pro 2TB NVMe",
       "category": "storage",
-      "our_price_tl": 4199,
+      "our_price_tl": 3899,
       "cost_price_tl": 3100,
-      "stock_qty": 23,
+      "stock_qty": 45,
       "weight_kg": 0.1,
       "desi": 1,
       "tags": ["high-stock", "bundle-candidate", "gaming-essential"],
@@ -28,8 +28,8 @@
       "sku": "MOUSE-RAZER-DEATHADDER-V3",
       "name": "Razer DeathAdder V3 HyperSpeed",
       "category": "peripheral",
-      "our_price_tl": 2299,
-      "cost_price_tl": 1550,
+      "our_price_tl": 2499,
+      "cost_price_tl": 900,
       "stock_qty": 11,
       "weight_kg": 0.09,
       "desi": 2,
@@ -42,17 +42,17 @@
     {
       "name": "GameGaraj",
       "listings": [
-        { "sku": "MSI-RAIDER-GE78-RTX4080",  "price_tl": 91500, "stock": "var" },
-        { "sku": "SSD-2TB-SAMSUNG-990PRO",    "price_tl": 4299,  "stock": "var" },
-        { "sku": "MOUSE-RAZER-DEATHADDER-V3", "price_tl": 2399,  "stock": "yok" }
+        { "sku": "MSI-RAIDER-GE78-RTX4080",  "price_tl": 97500, "stock": "var" },
+        { "sku": "SSD-2TB-SAMSUNG-990PRO",    "price_tl": 4199,  "stock": "var" },
+        { "sku": "MOUSE-RAZER-DEATHADDER-V3", "price_tl": 2699,  "stock": "yok" }
       ]
     },
     {
       "name": "ITopya",
       "listings": [
-        { "sku": "MSI-RAIDER-GE78-RTX4080",  "price_tl": 88999, "stock": "var" },
-        { "sku": "SSD-2TB-SAMSUNG-990PRO",    "price_tl": 4099,  "stock": "var" },
-        { "sku": "MOUSE-RAZER-DEATHADDER-V3", "price_tl": 2249,  "stock": "var" }
+        { "sku": "MSI-RAIDER-GE78-RTX4080",  "price_tl": 94999, "stock": "var" },
+        { "sku": "SSD-2TB-SAMSUNG-990PRO",    "price_tl": 3999,  "stock": "var" },
+        { "sku": "MOUSE-RAZER-DEATHADDER-V3", "price_tl": 2599,  "stock": "yok" }
       ]
     }
   ],

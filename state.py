@@ -28,5 +28,8 @@ class AgentState(TypedDict):
     # Bu, ajanın sistemde yapacağı "Paket Oluştur", "Fiyat İndir" gibi somut komutlardır.
     suggested_actions: Annotated[List[Dict[str, Any]], operator.add] 
     
+    # Market Ajanı Tarama Logu
+    crawl_log: str
+
     # Hata ve Log Yönetimi
     errors: Annotated[List[str], operator.add]
