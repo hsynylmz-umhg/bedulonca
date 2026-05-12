@@ -10,7 +10,20 @@
       "weight_kg": 3.1,
       "desi": 18,
       "tags": ["high-end", "4K-gaming", "content-creation"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/MSI_Logo.svg/320px-MSI_Logo.svg.png"
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/1/13/MSI_Logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 1850,
+      "buy_date": "2025-01-15",
+      "buy_exchange_rate": 32.80,
+      "sales_per_week": 1,
+      "monthly_history": [
+        {"month": "Ara", "price": 73000, "sales_qty": 3, "profit_margin_pct": 11.5},
+        {"month": "Oca", "price": 75000, "sales_qty": 4, "profit_margin_pct": 12.8},
+        {"month": "Şub", "price": 77500, "sales_qty": 5, "profit_margin_pct": 14.2},
+        {"month": "Mar", "price": 78000, "sales_qty": 4, "profit_margin_pct": 10.1},
+        {"month": "Nis", "price": 79999, "sales_qty": 2, "profit_margin_pct": 6.3},
+        {"month": "May", "price": 79999, "sales_qty": 4, "profit_margin_pct": -1.7}
+      ]
     },
     {
       "sku": "SSD-2TB-SAMSUNG-990PRO",
@@ -22,7 +35,20 @@
       "weight_kg": 0.1,
       "desi": 1,
       "tags": ["high-stock", "bundle-candidate", "gaming-essential"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Samsung_Logo.svg/320px-Samsung_Logo.svg.png"
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 89,
+      "buy_date": "2025-02-20",
+      "buy_exchange_rate": 31.50,
+      "sales_per_week": 8,
+      "monthly_history": [
+        {"month": "Ara", "price": 3499, "sales_qty": 28, "profit_margin_pct": 18.2},
+        {"month": "Oca", "price": 3599, "sales_qty": 32, "profit_margin_pct": 20.1},
+        {"month": "Şub", "price": 3699, "sales_qty": 35, "profit_margin_pct": 21.4},
+        {"month": "Mar", "price": 3799, "sales_qty": 38, "profit_margin_pct": 22.6},
+        {"month": "Nis", "price": 3849, "sales_qty": 30, "profit_margin_pct": 20.9},
+        {"month": "May", "price": 3899, "sales_qty": 34, "profit_margin_pct": 20.5}
+      ]
     },
     {
       "sku": "MOUSE-RAZER-DEATHADDER-V3",
@@ -34,7 +60,495 @@
       "weight_kg": 0.09,
       "desi": 2,
       "tags": ["high-margin", "bundle-candidate", "esports"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4e/Razer_logo.svg/320px-Razer_logo.svg.png"
+      "logo_url": "https://upload.wikimedia.org/wikipedia/en/4/4e/Razer_logo.svg",
+      "buy_currency": "TRY",
+      "buy_price": 900,
+      "buy_date": "2025-03-10",
+      "buy_exchange_rate": 1.0,
+      "sales_per_week": 4,
+      "monthly_history": [
+        {"month": "Ara", "price": 2199, "sales_qty": 14, "profit_margin_pct": 55.2},
+        {"month": "Oca", "price": 2299, "sales_qty": 16, "profit_margin_pct": 58.1},
+        {"month": "Şub", "price": 2399, "sales_qty": 18, "profit_margin_pct": 60.4},
+        {"month": "Mar", "price": 2499, "sales_qty": 17, "profit_margin_pct": 63.2},
+        {"month": "Nis", "price": 2499, "sales_qty": 15, "profit_margin_pct": 63.2},
+        {"month": "May", "price": 2499, "sales_qty": 16, "profit_margin_pct": 63.2}
+      ]
+    },
+    {
+      "sku": "GPU-ASUS-RTX4090-ROG",
+      "name": "ASUS ROG Strix RTX 4090 OC",
+      "category": "gpu",
+      "our_price_tl": 104999,
+      "cost_price_tl": 96200,
+      "stock_qty": 3,
+      "weight_kg": 2.4,
+      "desi": 12,
+      "tags": ["ultra-performance", "ray-tracing", "AI"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/2/2e/ASUS_Logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 2450,
+      "buy_date": "2025-02-05",
+      "buy_exchange_rate": 33.10,
+      "sales_per_week": 1,
+      "monthly_history": [
+        {"month": "Ara", "price": 98000, "sales_qty": 2, "profit_margin_pct": 7.8},
+        {"month": "Oca", "price": 100500, "sales_qty": 3, "profit_margin_pct": 8.9},
+        {"month": "Şub", "price": 102000, "sales_qty": 4, "profit_margin_pct": 9.2},
+        {"month": "Mar", "price": 103500, "sales_qty": 3, "profit_margin_pct": 7.5},
+        {"month": "Nis", "price": 104999, "sales_qty": 2, "profit_margin_pct": 5.4},
+        {"month": "May", "price": 104999, "sales_qty": 3, "profit_margin_pct": 5.4}
+      ]
+    },
+    {
+      "sku": "CPU-AMD-RYZEN9-9950X",
+      "name": "AMD Ryzen 9 9950X",
+      "category": "processor",
+      "our_price_tl": 24999,
+      "cost_price_tl": 20100,
+      "stock_qty": 15,
+      "weight_kg": 0.2,
+      "desi": 1,
+      "tags": ["creator", "gaming", "multitasking"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/7/7c/AMD_Logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 540,
+      "buy_date": "2025-01-28",
+      "buy_exchange_rate": 32.40,
+      "sales_per_week": 6,
+      "monthly_history": [
+        {"month": "Ara", "price": 22500, "sales_qty": 18, "profit_margin_pct": 17.3},
+        {"month": "Oca", "price": 23200, "sales_qty": 22, "profit_margin_pct": 18.9},
+        {"month": "Şub", "price": 23800, "sales_qty": 25, "profit_margin_pct": 19.6},
+        {"month": "Mar", "price": 24500, "sales_qty": 24, "profit_margin_pct": 20.8},
+        {"month": "Nis", "price": 24999, "sales_qty": 20, "profit_margin_pct": 19.6},
+        {"month": "May", "price": 24999, "sales_qty": 23, "profit_margin_pct": 19.6}
+      ]
+    },
+    {
+      "sku": "RAM-CORSAIR-DDR5-64GB",
+      "name": "Corsair Dominator Platinum RGB 64GB DDR5",
+      "category": "memory",
+      "our_price_tl": 11299,
+      "cost_price_tl": 8700,
+      "stock_qty": 20,
+      "weight_kg": 0.3,
+      "desi": 2,
+      "tags": ["rgb", "high-speed", "gaming"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Corsair_logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 220,
+      "buy_date": "2025-03-01",
+      "buy_exchange_rate": 34.00,
+      "sales_per_week": 7,
+      "monthly_history": [
+        {"month": "Ara", "price": 9800, "sales_qty": 24, "profit_margin_pct": 21.4},
+        {"month": "Oca", "price": 10200, "sales_qty": 27, "profit_margin_pct": 23.1},
+        {"month": "Şub", "price": 10700, "sales_qty": 30, "profit_margin_pct": 24.8},
+        {"month": "Mar", "price": 11000, "sales_qty": 28, "profit_margin_pct": 25.6},
+        {"month": "Nis", "price": 11299, "sales_qty": 25, "profit_margin_pct": 23.0},
+        {"month": "May", "price": 11299, "sales_qty": 29, "profit_margin_pct": 23.0}
+      ]
+    },
+    {
+      "sku": "CASE-NZXT-H9-ELITE",
+      "name": "NZXT H9 Elite White",
+      "category": "pc_case",
+      "our_price_tl": 8999,
+      "cost_price_tl": 6500,
+      "stock_qty": 9,
+      "weight_kg": 8.2,
+      "desi": 20,
+      "tags": ["premium", "tempered-glass", "rgb"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/5/57/NZXT_Logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 145,
+      "buy_date": "2025-02-18",
+      "buy_exchange_rate": 33.50,
+      "sales_per_week": 2,
+      "monthly_history": [
+        {"month": "Ara", "price": 7800, "sales_qty": 6, "profit_margin_pct": 22.1},
+        {"month": "Oca", "price": 8200, "sales_qty": 8, "profit_margin_pct": 24.3},
+        {"month": "Şub", "price": 8500, "sales_qty": 9, "profit_margin_pct": 25.6},
+        {"month": "Mar", "price": 8799, "sales_qty": 7, "profit_margin_pct": 26.1},
+        {"month": "Nis", "price": 8999, "sales_qty": 6, "profit_margin_pct": 27.8},
+        {"month": "May", "price": 8999, "sales_qty": 8, "profit_margin_pct": 27.8}
+      ]
+    },
+    {
+      "sku": "PSU-SEASONIC-1000W-GX",
+      "name": "Seasonic Focus GX 1000W Gold",
+      "category": "power_supply",
+      "our_price_tl": 7499,
+      "cost_price_tl": 5400,
+      "stock_qty": 18,
+      "weight_kg": 2.1,
+      "desi": 5,
+      "tags": ["80plus-gold", "modular", "silent"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Seasonic_logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 118,
+      "buy_date": "2025-01-19",
+      "buy_exchange_rate": 32.20,
+      "sales_per_week": 5,
+      "monthly_history": [
+        {"month": "Ara", "price": 6500, "sales_qty": 16, "profit_margin_pct": 24.5},
+        {"month": "Oca", "price": 6800, "sales_qty": 19, "profit_margin_pct": 26.2},
+        {"month": "Şub", "price": 7100, "sales_qty": 21, "profit_margin_pct": 27.1},
+        {"month": "Mar", "price": 7300, "sales_qty": 20, "profit_margin_pct": 26.8},
+        {"month": "Nis", "price": 7499, "sales_qty": 18, "profit_margin_pct": 28.0},
+        {"month": "May", "price": 7499, "sales_qty": 20, "profit_margin_pct": 28.0}
+      ]
+    },
+    {
+      "sku": "MONITOR-LG-ULTRAGEAR-32",
+      "name": "LG UltraGear 32GS95UE OLED",
+      "category": "monitor",
+      "our_price_tl": 42999,
+      "cost_price_tl": 36500,
+      "stock_qty": 5,
+      "weight_kg": 7.5,
+      "desi": 16,
+      "tags": ["oled", "240hz", "4k"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/2/20/LG_symbol.svg",
+      "buy_currency": "USD",
+      "buy_price": 910,
+      "buy_date": "2025-03-15",
+      "buy_exchange_rate": 34.50,
+      "sales_per_week": 2,
+      "monthly_history": [
+        {"month": "Ara", "price": 38000, "sales_qty": 5, "profit_margin_pct": 13.2},
+        {"month": "Oca", "price": 39500, "sales_qty": 7, "profit_margin_pct": 14.8},
+        {"month": "Şub", "price": 40800, "sales_qty": 8, "profit_margin_pct": 15.3},
+        {"month": "Mar", "price": 41500, "sales_qty": 6, "profit_margin_pct": 12.9},
+        {"month": "Nis", "price": 42999, "sales_qty": 5, "profit_margin_pct": 15.1},
+        {"month": "May", "price": 42999, "sales_qty": 7, "profit_margin_pct": 15.1}
+      ]
+    },
+    {
+      "sku": "KEYBOARD-LOGITECH-G915",
+      "name": "Logitech G915 TKL Lightspeed",
+      "category": "peripheral",
+      "our_price_tl": 6299,
+      "cost_price_tl": 4100,
+      "stock_qty": 13,
+      "weight_kg": 1.1,
+      "desi": 3,
+      "tags": ["wireless", "mechanical", "rgb"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/7/77/Logitech_logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 135,
+      "buy_date": "2025-01-10",
+      "buy_exchange_rate": 31.80,
+      "sales_per_week": 5,
+      "monthly_history": [
+        {"month": "Ara", "price": 5500, "sales_qty": 17, "profit_margin_pct": 30.2},
+        {"month": "Oca", "price": 5800, "sales_qty": 20, "profit_margin_pct": 32.1},
+        {"month": "Şub", "price": 5999, "sales_qty": 22, "profit_margin_pct": 33.4},
+        {"month": "Mar", "price": 6199, "sales_qty": 21, "profit_margin_pct": 34.7},
+        {"month": "Nis", "price": 6299, "sales_qty": 18, "profit_margin_pct": 34.9},
+        {"month": "May", "price": 6299, "sales_qty": 20, "profit_margin_pct": 34.9}
+      ]
+    },
+    {
+      "sku": "HEADSET-STEELSERIES-ARCTIS",
+      "name": "SteelSeries Arctis Nova Pro",
+      "category": "audio",
+      "our_price_tl": 11499,
+      "cost_price_tl": 8900,
+      "stock_qty": 10,
+      "weight_kg": 0.7,
+      "desi": 4,
+      "tags": ["wireless", "noise-cancelling", "gaming"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/9/95/SteelSeries_logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 240,
+      "buy_date": "2025-02-11",
+      "buy_exchange_rate": 33.00,
+      "sales_per_week": 4,
+      "monthly_history": [
+        {"month": "Ara", "price": 9999, "sales_qty": 13, "profit_margin_pct": 20.5},
+        {"month": "Oca", "price": 10500, "sales_qty": 15, "profit_margin_pct": 22.8},
+        {"month": "Şub", "price": 10999, "sales_qty": 17, "profit_margin_pct": 23.6},
+        {"month": "Mar", "price": 11200, "sales_qty": 16, "profit_margin_pct": 22.5},
+        {"month": "Nis", "price": 11499, "sales_qty": 14, "profit_margin_pct": 22.6},
+        {"month": "May", "price": 11499, "sales_qty": 16, "profit_margin_pct": 22.6}
+      ]
+    },
+    {
+      "sku": "MOTHERBOARD-GIGABYTE-X870",
+      "name": "Gigabyte X870 Aorus Master",
+      "category": "motherboard",
+      "our_price_tl": 17999,
+      "cost_price_tl": 14200,
+      "stock_qty": 8,
+      "weight_kg": 1.8,
+      "desi": 5,
+      "tags": ["pcie5", "wifi7", "enthusiast"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Gigabyte_Technology_logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 360,
+      "buy_date": "2025-02-23",
+      "buy_exchange_rate": 33.40,
+      "sales_per_week": 3,
+      "monthly_history": [
+        {"month": "Ara", "price": 15500, "sales_qty": 9, "profit_margin_pct": 18.1},
+        {"month": "Oca", "price": 16200, "sales_qty": 11, "profit_margin_pct": 19.4},
+        {"month": "Şub", "price": 16800, "sales_qty": 13, "profit_margin_pct": 20.7},
+        {"month": "Mar", "price": 17500, "sales_qty": 12, "profit_margin_pct": 21.2},
+        {"month": "Nis", "price": 17999, "sales_qty": 10, "profit_margin_pct": 21.1},
+        {"month": "May", "price": 17999, "sales_qty": 12, "profit_margin_pct": 21.1}
+      ]
+    },
+    {
+      "sku": "COOLER-NOCTUA-NH-D15",
+      "name": "Noctua NH-D15 Chromax Black",
+      "category": "cooling",
+      "our_price_tl": 4999,
+      "cost_price_tl": 3400,
+      "stock_qty": 22,
+      "weight_kg": 1.5,
+      "desi": 4,
+      "tags": ["silent", "air-cooler", "premium"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Noctua_logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 92,
+      "buy_date": "2025-03-05",
+      "buy_exchange_rate": 34.20,
+      "sales_per_week": 6,
+      "monthly_history": [
+        {"month": "Ara", "price": 4299, "sales_qty": 20, "profit_margin_pct": 26.3},
+        {"month": "Oca", "price": 4499, "sales_qty": 23, "profit_margin_pct": 28.9},
+        {"month": "Şub", "price": 4699, "sales_qty": 25, "profit_margin_pct": 31.2},
+        {"month": "Mar", "price": 4799, "sales_qty": 24, "profit_margin_pct": 29.1},
+        {"month": "Nis", "price": 4999, "sales_qty": 22, "profit_margin_pct": 32.0},
+        {"month": "May", "price": 4999, "sales_qty": 24, "profit_margin_pct": 32.0}
+      ]
+    },
+    {
+      "sku": "SSD-WD-BLACK-4TB",
+      "name": "WD Black SN850X 4TB",
+      "category": "storage",
+      "our_price_tl": 8499,
+      "cost_price_tl": 6800,
+      "stock_qty": 27,
+      "weight_kg": 0.1,
+      "desi": 1,
+      "tags": ["fast-storage", "gaming", "nvme"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/0/09/Western_Digital_Logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 180,
+      "buy_date": "2025-02-01",
+      "buy_exchange_rate": 32.70,
+      "sales_per_week": 7,
+      "monthly_history": [
+        {"month": "Ara", "price": 7200, "sales_qty": 24, "profit_margin_pct": 17.8},
+        {"month": "Oca", "price": 7600, "sales_qty": 27, "profit_margin_pct": 19.2},
+        {"month": "Şub", "price": 7999, "sales_qty": 30, "profit_margin_pct": 20.6},
+        {"month": "Mar", "price": 8200, "sales_qty": 28, "profit_margin_pct": 20.0},
+        {"month": "Nis", "price": 8499, "sales_qty": 26, "profit_margin_pct": 20.0},
+        {"month": "May", "price": 8499, "sales_qty": 29, "profit_margin_pct": 20.0}
+      ]
+    },
+    {
+      "sku": "LAPTOP-ASUS-ZEPHYRUS-G16",
+      "name": "ASUS ROG Zephyrus G16 RTX 4070",
+      "category": "gaming_laptop",
+      "our_price_tl": 68999,
+      "cost_price_tl": 60300,
+      "stock_qty": 6,
+      "weight_kg": 2.2,
+      "desi": 15,
+      "tags": ["portable", "creator", "oled"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/2/2e/ASUS_Logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 1540,
+      "buy_date": "2025-01-25",
+      "buy_exchange_rate": 32.60,
+      "sales_per_week": 2,
+      "monthly_history": [
+        {"month": "Ara", "price": 63000, "sales_qty": 5, "profit_margin_pct": 10.2},
+        {"month": "Oca", "price": 65000, "sales_qty": 7, "profit_margin_pct": 11.8},
+        {"month": "Şub", "price": 66500, "sales_qty": 8, "profit_margin_pct": 12.4},
+        {"month": "Mar", "price": 67500, "sales_qty": 6, "profit_margin_pct": 10.9},
+        {"month": "Nis", "price": 68999, "sales_qty": 5, "profit_margin_pct": 12.6},
+        {"month": "May", "price": 68999, "sales_qty": 7, "profit_margin_pct": 12.6}
+      ]
+    },
+    {
+      "sku": "TABLET-APPLE-IPADPRO-M4",
+      "name": "Apple iPad Pro M4 13",
+      "category": "tablet",
+      "our_price_tl": 56999,
+      "cost_price_tl": 48800,
+      "stock_qty": 7,
+      "weight_kg": 0.8,
+      "desi": 4,
+      "tags": ["oled", "stylus", "premium"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
+      "buy_currency": "USD",
+      "buy_price": 1280,
+      "buy_date": "2025-03-20",
+      "buy_exchange_rate": 34.80,
+      "sales_per_week": 2,
+      "monthly_history": [
+        {"month": "Ara", "price": 51000, "sales_qty": 6, "profit_margin_pct": 12.5},
+        {"month": "Oca", "price": 52500, "sales_qty": 7, "profit_margin_pct": 13.1},
+        {"month": "Şub", "price": 54000, "sales_qty": 8, "profit_margin_pct": 13.8},
+        {"month": "Mar", "price": 55500, "sales_qty": 6, "profit_margin_pct": 12.3},
+        {"month": "Nis", "price": 56999, "sales_qty": 5, "profit_margin_pct": 14.4},
+        {"month": "May", "price": 56999, "sales_qty": 8, "profit_margin_pct": 14.4}
+      ]
+    },
+    {
+      "sku": "PHONE-SAMSUNG-S25ULTRA",
+      "name": "Samsung Galaxy S25 Ultra",
+      "category": "smartphone",
+      "our_price_tl": 71999,
+      "cost_price_tl": 64500,
+      "stock_qty": 12,
+      "weight_kg": 0.4,
+      "desi": 2,
+      "tags": ["flagship", "ai-camera", "5g"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 1400,
+      "buy_date": "2025-02-27",
+      "buy_exchange_rate": 33.80,
+      "sales_per_week": 5,
+      "monthly_history": [
+        {"month": "Ara", "price": 65000, "sales_qty": 14, "profit_margin_pct": 8.9},
+        {"month": "Oca", "price": 67500, "sales_qty": 17, "profit_margin_pct": 9.8},
+        {"month": "Şub", "price": 69000, "sales_qty": 20, "profit_margin_pct": 10.4},
+        {"month": "Mar", "price": 70500, "sales_qty": 19, "profit_margin_pct": 10.2},
+        {"month": "Nis", "price": 71999, "sales_qty": 16, "profit_margin_pct": 10.4},
+        {"month": "May", "price": 71999, "sales_qty": 20, "profit_margin_pct": 10.4}
+      ]
+    },
+    {
+      "sku": "ROUTER-ASUS-AXE16000",
+      "name": "ASUS ROG Rapture GT-AXE16000",
+      "category": "network",
+      "our_price_tl": 15499,
+      "cost_price_tl": 12300,
+      "stock_qty": 9,
+      "weight_kg": 2.6,
+      "desi": 6,
+      "tags": ["wifi6e", "gaming-router", "mesh"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/2/2e/ASUS_Logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 340,
+      "buy_date": "2025-03-08",
+      "buy_exchange_rate": 34.10,
+      "sales_per_week": 3,
+      "monthly_history": [
+        {"month": "Ara", "price": 13500, "sales_qty": 9, "profit_margin_pct": 21.4},
+        {"month": "Oca", "price": 14000, "sales_qty": 11, "profit_margin_pct": 22.8},
+        {"month": "Şub", "price": 14500, "sales_qty": 12, "profit_margin_pct": 23.5},
+        {"month": "Mar", "price": 14999, "sales_qty": 11, "profit_margin_pct": 22.9},
+        {"month": "Nis", "price": 15499, "sales_qty": 9, "profit_margin_pct": 20.6},
+        {"month": "May", "price": 15499, "sales_qty": 11, "profit_margin_pct": 20.6}
+      ]
+    },
+    {
+      "sku": "WEBCAM-ELGATO-FACECAM",
+      "name": "Elgato Facecam Pro",
+      "category": "streaming",
+      "our_price_tl": 8299,
+      "cost_price_tl": 6100,
+      "stock_qty": 14,
+      "weight_kg": 0.5,
+      "desi": 2,
+      "tags": ["streamer", "4k", "usb-c"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Corsair_logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 170,
+      "buy_date": "2025-01-30",
+      "buy_exchange_rate": 32.90,
+      "sales_per_week": 4,
+      "monthly_history": [
+        {"month": "Ara", "price": 7200, "sales_qty": 13, "profit_margin_pct": 24.8},
+        {"month": "Oca", "price": 7600, "sales_qty": 15, "profit_margin_pct": 26.2},
+        {"month": "Şub", "price": 7900, "sales_qty": 17, "profit_margin_pct": 27.4},
+        {"month": "Mar", "price": 8100, "sales_qty": 16, "profit_margin_pct": 26.9},
+        {"month": "Nis", "price": 8299, "sales_qty": 14, "profit_margin_pct": 26.5},
+        {"month": "May", "price": 8299, "sales_qty": 16, "profit_margin_pct": 26.5}
+      ]
+    },
+    {
+      "sku": "CHAIR-DXRACER-AIR",
+      "name": "DXRacer Air Gaming Chair",
+      "category": "gaming_furniture",
+      "our_price_tl": 18999,
+      "cost_price_tl": 14200,
+      "stock_qty": 5,
+      "weight_kg": 18.0,
+      "desi": 30,
+      "tags": ["ergonomic", "mesh", "premium"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/DXRacer_logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 390,
+      "buy_date": "2025-02-16",
+      "buy_exchange_rate": 33.20,
+      "sales_per_week": 1,
+      "monthly_history": [
+        {"month": "Ara", "price": 16500, "sales_qty": 3, "profit_margin_pct": 25.1},
+        {"month": "Oca", "price": 17200, "sales_qty": 4, "profit_margin_pct": 26.4},
+        {"month": "Şub", "price": 17900, "sales_qty": 4, "profit_margin_pct": 27.8},
+        {"month": "Mar", "price": 18500, "sales_qty": 3, "profit_margin_pct": 26.9},
+        {"month": "Nis", "price": 18999, "sales_qty": 2, "profit_margin_pct": 25.3},
+        {"month": "May", "price": 18999, "sales_qty": 4, "profit_margin_pct": 25.3}
+      ]
+    },
+    {
+      "sku": "MICROPHONE-HYPERX-QUADCAST",
+      "name": "HyperX QuadCast S",
+      "category": "audio",
+      "our_price_tl": 5799,
+      "cost_price_tl": 3900,
+      "stock_qty": 16,
+      "weight_kg": 0.8,
+      "desi": 3,
+      "tags": ["rgb", "streaming", "usb"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/HyperX_logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 105,
+      "buy_date": "2025-03-12",
+      "buy_exchange_rate": 34.30,
+      "sales_per_week": 5,
+      "monthly_history": [
+        {"month": "Ara", "price": 4999, "sales_qty": 17, "profit_margin_pct": 32.5},
+        {"month": "Oca", "price": 5200, "sales_qty": 19, "profit_margin_pct": 33.8},
+        {"month": "Şub", "price": 5499, "sales_qty": 21, "profit_margin_pct": 35.4},
+        {"month": "Mar", "price": 5699, "sales_qty": 20, "profit_margin_pct": 36.1},
+        {"month": "Nis", "price": 5799, "sales_qty": 18, "profit_margin_pct": 32.8},
+        {"month": "May", "price": 5799, "sales_qty": 20, "profit_margin_pct": 32.8}
+      ]
+    },
+    {
+      "sku": "CONSOLE-SONY-PS5PRO",
+      "name": "Sony PlayStation 5 Pro",
+      "category": "console",
+      "our_price_tl": 39999,
+      "cost_price_tl": 34400,
+      "stock_qty": 10,
+      "weight_kg": 5.2,
+      "desi": 12,
+      "tags": ["gaming", "8k", "ray-tracing"],
+      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Sony_Interactive_Entertainment_logo.svg",
+      "buy_currency": "USD",
+      "buy_price": 780,
+      "buy_date": "2025-02-25",
+      "buy_exchange_rate": 33.60,
+      "sales_per_week": 6,
+      "monthly_history": [
+        {"month": "Ara", "price": 36000, "sales_qty": 18, "profit_margin_pct": 11.2},
+        {"month": "Oca", "price": 37500, "sales_qty": 21, "profit_margin_pct": 12.8},
+        {"month": "Şub", "price": 38500, "sales_qty": 24, "profit_margin_pct": 13.4},
+        {"month": "Mar", "price": 39000, "sales_qty": 22, "profit_margin_pct": 12.9},
+        {"month": "Nis", "price": 39999, "sales_qty": 20, "profit_margin_pct": 14.0},
+        {"month": "May", "price": 39999, "sales_qty": 23, "profit_margin_pct": 14.0}
+      ]
     }
   ],
 
@@ -42,17 +556,21 @@
     {
       "name": "GameGaraj",
       "listings": [
-        { "sku": "MSI-RAIDER-GE78-RTX4080",  "price_tl": 97500, "stock": "var" },
-        { "sku": "SSD-2TB-SAMSUNG-990PRO",    "price_tl": 4199,  "stock": "var" },
-        { "sku": "MOUSE-RAZER-DEATHADDER-V3", "price_tl": 2699,  "stock": "yok" }
+        { "sku": "MSI-RAIDER-GE78-RTX4080", "price_tl": 97500, "stock": "var" },
+        { "sku": "SSD-2TB-SAMSUNG-990PRO",  "price_tl": 4199,  "stock": "var" },
+        { "sku": "GPU-ASUS-RTX4090-ROG",    "price_tl": 109999,"stock": "yok" },
+        { "sku": "CPU-AMD-RYZEN9-9950X",    "price_tl": 25999, "stock": "var" },
+        { "sku": "MONITOR-LG-ULTRAGEAR-32", "price_tl": 44899, "stock": "var" }
       ]
     },
     {
       "name": "ITopya",
       "listings": [
-        { "sku": "MSI-RAIDER-GE78-RTX4080",  "price_tl": 94999, "stock": "var" },
-        { "sku": "SSD-2TB-SAMSUNG-990PRO",    "price_tl": 3999,  "stock": "var" },
-        { "sku": "MOUSE-RAZER-DEATHADDER-V3", "price_tl": 2599,  "stock": "yok" }
+        { "sku": "MSI-RAIDER-GE78-RTX4080", "price_tl": 94999, "stock": "var" },
+        { "sku": "SSD-2TB-SAMSUNG-990PRO",  "price_tl": 3999,  "stock": "var" },
+        { "sku": "GPU-ASUS-RTX4090-ROG",    "price_tl": 107499,"stock": "var" },
+        { "sku": "CPU-AMD-RYZEN9-9950X",    "price_tl": 25299, "stock": "var" },
+        { "sku": "MONITOR-LG-ULTRAGEAR-32", "price_tl": 43999, "stock": "yok" }
       ]
     }
   ],
@@ -63,16 +581,25 @@
     "cargo_per_desi_tl": 12,
     "monthly_inflation_pct": 2.8,
     "warehouse_monthly_cost_tl": 15000,
-    "min_margin_pct": 12.0
+    "min_margin_pct": 12.0,
+    "current_usd_rate": 38.50
   },
 
   "trends": {
-    "hot_games": ["Elden Ring 2", "Battlefield 6", "Cyberpunk 2078"],
+    "hot_games": [
+      "Elden Ring 2", "Battlefield 6", "Cyberpunk 2078", "GTA VI", "The Witcher 4"
+    ],
     "recommended_hardware": {
       "Battlefield 6":  ["GPU: RTX 4080+", "RAM: 32GB", "SSD: 2TB NVMe"],
-      "Cyberpunk 2078": ["GPU: RTX 4090",  "RAM: 64GB", "SSD: 2TB NVMe"]
+      "Cyberpunk 2078": ["GPU: RTX 4090",  "RAM: 64GB", "SSD: 2TB NVMe"],
+      "GTA VI":         ["GPU: RTX 4070 Ti","RAM: 32GB", "SSD: 1TB NVMe"]
     },
-    "trending_skus": ["SSD-2TB-SAMSUNG-990PRO", "MSI-RAIDER-GE78-RTX4080"]
+    "trending_skus": [
+      "SSD-2TB-SAMSUNG-990PRO",
+      "MSI-RAIDER-GE78-RTX4080",
+      "GPU-ASUS-RTX4090-ROG",
+      "PHONE-SAMSUNG-S25ULTRA"
+    ]
   },
 
   "sales_history": [

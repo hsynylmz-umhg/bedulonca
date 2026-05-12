@@ -19,6 +19,7 @@ def _build_micro_prompt(
     """
     Tek bir SKU için kısa ve odaklı mikro-prompt üretir.
     Gemini'den sadece tek bir JSON objesi {} ister.
+    V7: old_price_tl ve price_change_pct alanları zorunlu hale getirildi.
     """
     metrics = cost_metrics.get(sku, {})
     comp    = competitor_info.get(sku, {})
@@ -28,13 +29,14 @@ def _build_micro_prompt(
         for r in comp.get("competitors", [])
     ) or "Rakip verisi yok."
 
-    is_trending = "EVET" if sku in trend_skus else "HAYIR"
+    is_trending  = "EVET" if sku in trend_skus else "HAYIR"
+    current_price = metrics.get('our_price_tl', 0)
 
     return f"""Sen bir e-ticaret kâr optimizasyon motorusun. Tek ürün analizi yapacaksın.
 
 ÜRÜN: {sku}
 ─────────────────────────────────────
-Mevcut Fiyat    : {metrics.get('our_price_tl', '?')} TL
+Mevcut Fiyat    : {current_price} TL
 Toplam Maliyet  : {metrics.get('total_cost_tl', '?')} TL
 Kırmızı Çizgi  : {metrics.get('red_line_price_tl', '?')} TL  ← asla altına inme
 Mevcut Marj     : %{metrics.get('current_margin_pct', '?')}
@@ -50,17 +52,18 @@ KARAR KURALLARI:
 3. Kırmızı çizginin ALTINA düşen hiçbir fiyat önerme.
 
 ÇIKTI FORMATI (ZORUNLU):
-Sadece tek bir JSON objesi döndür. Başka hiçbir şey yazma.
-Markdown, açıklama, giriş/çıkış cümlesi YASAK.
+Sadece tek bir JSON objesi döndür. Markdown, açıklama, giriş cümlesi YASAK.
 
-price_update için:
-{{"action_type": "price_update", "sku": "{sku}", "new_price_tl": <sayi>, "reason": "<kisa gerekce>", "button_label": "<buton metni>"}}
+price_update için (old_price_tl ve price_change_pct ZORUNLU):
+{{"action_type": "price_update", "sku": "{sku}", "old_price_tl": {current_price}, "new_price_tl": <sayi>, "price_change_pct": <yuzde_degisim_float>, "reason": "<kisa gerekce>", "button_label": "<buton metni>"}}
 
 create_bundle için:
-{{"action_type": "create_bundle", "skus": ["{sku}", "<diger_sku>"], "bundle_price_tl": <sayi>, "reason": "<kisa gerekce>", "button_label": "<buton metni>"}}
+{{"action_type": "create_bundle", "skus": ["{sku}", "<diger_sku>"], "old_price_tl": {current_price}, "bundle_price_tl": <sayi>, "price_change_pct": <yuzde_degisim_float>, "reason": "<kisa gerekce>", "button_label": "<buton metni>"}}
 
 hold için:
-{{"action_type": "hold", "sku": "{sku}", "reason": "<kisa gerekce>", "button_label": "<buton metni>"}}
+{{"action_type": "hold", "sku": "{sku}", "old_price_tl": {current_price}, "reason": "<kisa gerekce>", "button_label": "<buton metni>"}}
+
+price_change_pct hesaplama: ((new_price - old_price) / old_price) * 100, iki ondalık basamak.
 """
 
 
@@ -113,7 +116,8 @@ def strategist_agent(state: AgentState) -> dict:
 
     try:
         genai.configure(api_key=api_key)
-        model = genai.GenerativeModel(model_name="gemini-2.5-flash")
+        # gemini-1.5-flash: Yüksek RPM limiti, düşük maliyet, günlük kotaya uygun.
+        model = genai.GenerativeModel(model_name="gemini-2.5-flash-lite")
     except Exception as e:
         errors.append(f"strategist_agent: Gemini yapılandırma hatası — {e}")
         return {"final_strategy": "", "suggested_actions": [], "errors": errors}
@@ -145,13 +149,9 @@ def strategist_agent(state: AgentState) -> dict:
 
         # ── Gemini Çağrısı ────────────────────────────────────────────
         try:
-            # En sade çağrı: max_output_tokens, thinking_config ve
-            # request_options kaldırıldı. SDK artık API'ye "kısa kes"
-            # talimatı gönderemez; API kendi varsayılan rahat sınırlarıyla
-            # (8192 token) çalışır. Truncation sorunu kökten ortadan kalkar.
             response = model.generate_content(
                 micro_prompt,
-                generation_config={"temperature": 0.2},  # Sadece JSON için düşük sıcaklık
+                generation_config={"temperature": 0.2},
             )
 
             raw_text = response.text
