@@ -10,12 +10,13 @@
       "weight_kg": 3.1,
       "desi": 18,
       "tags": ["high-end", "4K-gaming", "content-creation"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/1/13/MSI_Logo.svg",
       "buy_currency": "USD",
-      "buy_price": 1850,
-      "buy_date": "2025-01-15",
       "buy_exchange_rate": 32.80,
       "sales_per_week": 1,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 2, "buy_price_usd": 1800, "buy_date": "2024-12-10"},
+        {"batch_id": "B02", "qty": 2, "buy_price_usd": 1850, "buy_date": "2025-01-15"}
+      ],
       "monthly_history": [
         {"month": "Ara", "price": 73000, "sales_qty": 3, "profit_margin_pct": 11.5},
         {"month": "Oca", "price": 75000, "sales_qty": 4, "profit_margin_pct": 12.8},
@@ -35,12 +36,13 @@
       "weight_kg": 0.1,
       "desi": 1,
       "tags": ["high-stock", "bundle-candidate", "gaming-essential"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg",
       "buy_currency": "USD",
-      "buy_price": 89,
-      "buy_date": "2025-02-20",
       "buy_exchange_rate": 31.50,
       "sales_per_week": 8,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 10, "buy_price_usd": 82, "buy_date": "2025-01-10"},
+        {"batch_id": "B02", "qty": 35, "buy_price_usd": 89, "buy_date": "2025-02-20"}
+      ],
       "monthly_history": [
         {"month": "Ara", "price": 3499, "sales_qty": 28, "profit_margin_pct": 18.2},
         {"month": "Oca", "price": 3599, "sales_qty": 32, "profit_margin_pct": 20.1},
@@ -60,12 +62,13 @@
       "weight_kg": 0.09,
       "desi": 2,
       "tags": ["high-margin", "bundle-candidate", "esports"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/en/4/4e/Razer_logo.svg",
       "buy_currency": "TRY",
-      "buy_price": 900,
-      "buy_date": "2025-03-10",
       "buy_exchange_rate": 1.0,
       "sales_per_week": 4,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 5, "buy_price_usd": 900, "buy_date": "2025-02-01"},
+        {"batch_id": "B02", "qty": 6, "buy_price_usd": 900, "buy_date": "2025-03-10"}
+      ],
       "monthly_history": [
         {"month": "Ara", "price": 2199, "sales_qty": 14, "profit_margin_pct": 55.2},
         {"month": "Oca", "price": 2299, "sales_qty": 16, "profit_margin_pct": 58.1},
@@ -85,12 +88,13 @@
       "weight_kg": 2.4,
       "desi": 12,
       "tags": ["ultra-performance", "ray-tracing", "AI"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/2/2e/ASUS_Logo.svg",
       "buy_currency": "USD",
-      "buy_price": 2450,
-      "buy_date": "2025-02-05",
       "buy_exchange_rate": 33.10,
       "sales_per_week": 1,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 1, "buy_price_usd": 2380, "buy_date": "2025-01-20"},
+        {"batch_id": "B02", "qty": 2, "buy_price_usd": 2450, "buy_date": "2025-02-05"}
+      ],
       "monthly_history": [
         {"month": "Ara", "price": 98000, "sales_qty": 2, "profit_margin_pct": 7.8},
         {"month": "Oca", "price": 100500, "sales_qty": 3, "profit_margin_pct": 8.9},
@@ -110,12 +114,13 @@
       "weight_kg": 0.2,
       "desi": 1,
       "tags": ["creator", "gaming", "multitasking"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/7/7c/AMD_Logo.svg",
       "buy_currency": "USD",
-      "buy_price": 540,
-      "buy_date": "2025-01-28",
       "buy_exchange_rate": 32.40,
       "sales_per_week": 6,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 7, "buy_price_usd": 520, "buy_date": "2025-01-05"},
+        {"batch_id": "B02", "qty": 8, "buy_price_usd": 540, "buy_date": "2025-01-28"}
+      ],
       "monthly_history": [
         {"month": "Ara", "price": 22500, "sales_qty": 18, "profit_margin_pct": 17.3},
         {"month": "Oca", "price": 23200, "sales_qty": 22, "profit_margin_pct": 18.9},
@@ -135,14 +140,15 @@
       "weight_kg": 0.3,
       "desi": 2,
       "tags": ["rgb", "high-speed", "gaming"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Corsair_logo.svg",
       "buy_currency": "USD",
-      "buy_price": 220,
-      "buy_date": "2025-03-01",
       "buy_exchange_rate": 34.00,
       "sales_per_week": 7,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 8,  "buy_price_usd": 210, "buy_date": "2025-02-10"},
+        {"batch_id": "B02", "qty": 12, "buy_price_usd": 220, "buy_date": "2025-03-01"}
+      ],
       "monthly_history": [
-        {"month": "Ara", "price": 9800, "sales_qty": 24, "profit_margin_pct": 21.4},
+        {"month": "Ara", "price": 9800,  "sales_qty": 24, "profit_margin_pct": 21.4},
         {"month": "Oca", "price": 10200, "sales_qty": 27, "profit_margin_pct": 23.1},
         {"month": "Şub", "price": 10700, "sales_qty": 30, "profit_margin_pct": 24.8},
         {"month": "Mar", "price": 11000, "sales_qty": 28, "profit_margin_pct": 25.6},
@@ -160,19 +166,20 @@
       "weight_kg": 8.2,
       "desi": 20,
       "tags": ["premium", "tempered-glass", "rgb"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/5/57/NZXT_Logo.svg",
       "buy_currency": "USD",
-      "buy_price": 145,
-      "buy_date": "2025-02-18",
       "buy_exchange_rate": 33.50,
       "sales_per_week": 2,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 4, "buy_price_usd": 138, "buy_date": "2025-01-25"},
+        {"batch_id": "B02", "qty": 5, "buy_price_usd": 145, "buy_date": "2025-02-18"}
+      ],
       "monthly_history": [
-        {"month": "Ara", "price": 7800, "sales_qty": 6, "profit_margin_pct": 22.1},
-        {"month": "Oca", "price": 8200, "sales_qty": 8, "profit_margin_pct": 24.3},
-        {"month": "Şub", "price": 8500, "sales_qty": 9, "profit_margin_pct": 25.6},
-        {"month": "Mar", "price": 8799, "sales_qty": 7, "profit_margin_pct": 26.1},
-        {"month": "Nis", "price": 8999, "sales_qty": 6, "profit_margin_pct": 27.8},
-        {"month": "May", "price": 8999, "sales_qty": 8, "profit_margin_pct": 27.8}
+        {"month": "Ara", "price": 7800, "sales_qty": 6,  "profit_margin_pct": 22.1},
+        {"month": "Oca", "price": 8200, "sales_qty": 8,  "profit_margin_pct": 24.3},
+        {"month": "Şub", "price": 8500, "sales_qty": 9,  "profit_margin_pct": 25.6},
+        {"month": "Mar", "price": 8799, "sales_qty": 7,  "profit_margin_pct": 26.1},
+        {"month": "Nis", "price": 8999, "sales_qty": 6,  "profit_margin_pct": 27.8},
+        {"month": "May", "price": 8999, "sales_qty": 8,  "profit_margin_pct": 27.8}
       ]
     },
     {
@@ -185,12 +192,13 @@
       "weight_kg": 2.1,
       "desi": 5,
       "tags": ["80plus-gold", "modular", "silent"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Seasonic_logo.svg",
       "buy_currency": "USD",
-      "buy_price": 118,
-      "buy_date": "2025-01-19",
       "buy_exchange_rate": 32.20,
       "sales_per_week": 5,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 10, "buy_price_usd": 112, "buy_date": "2024-12-20"},
+        {"batch_id": "B02", "qty": 8,  "buy_price_usd": 118, "buy_date": "2025-01-19"}
+      ],
       "monthly_history": [
         {"month": "Ara", "price": 6500, "sales_qty": 16, "profit_margin_pct": 24.5},
         {"month": "Oca", "price": 6800, "sales_qty": 19, "profit_margin_pct": 26.2},
@@ -210,19 +218,20 @@
       "weight_kg": 7.5,
       "desi": 16,
       "tags": ["oled", "240hz", "4k"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/2/20/LG_symbol.svg",
       "buy_currency": "USD",
-      "buy_price": 910,
-      "buy_date": "2025-03-15",
       "buy_exchange_rate": 34.50,
       "sales_per_week": 2,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 2, "buy_price_usd": 880, "buy_date": "2025-02-20"},
+        {"batch_id": "B02", "qty": 3, "buy_price_usd": 910, "buy_date": "2025-03-15"}
+      ],
       "monthly_history": [
-        {"month": "Ara", "price": 38000, "sales_qty": 5, "profit_margin_pct": 13.2},
-        {"month": "Oca", "price": 39500, "sales_qty": 7, "profit_margin_pct": 14.8},
-        {"month": "Şub", "price": 40800, "sales_qty": 8, "profit_margin_pct": 15.3},
-        {"month": "Mar", "price": 41500, "sales_qty": 6, "profit_margin_pct": 12.9},
-        {"month": "Nis", "price": 42999, "sales_qty": 5, "profit_margin_pct": 15.1},
-        {"month": "May", "price": 42999, "sales_qty": 7, "profit_margin_pct": 15.1}
+        {"month": "Ara", "price": 38000, "sales_qty": 5,  "profit_margin_pct": 13.2},
+        {"month": "Oca", "price": 39500, "sales_qty": 7,  "profit_margin_pct": 14.8},
+        {"month": "Şub", "price": 40800, "sales_qty": 8,  "profit_margin_pct": 15.3},
+        {"month": "Mar", "price": 41500, "sales_qty": 6,  "profit_margin_pct": 12.9},
+        {"month": "Nis", "price": 42999, "sales_qty": 5,  "profit_margin_pct": 15.1},
+        {"month": "May", "price": 42999, "sales_qty": 7,  "profit_margin_pct": 15.1}
       ]
     },
     {
@@ -235,12 +244,13 @@
       "weight_kg": 1.1,
       "desi": 3,
       "tags": ["wireless", "mechanical", "rgb"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/7/77/Logitech_logo.svg",
       "buy_currency": "USD",
-      "buy_price": 135,
-      "buy_date": "2025-01-10",
       "buy_exchange_rate": 31.80,
       "sales_per_week": 5,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 6,  "buy_price_usd": 128, "buy_date": "2024-12-15"},
+        {"batch_id": "B02", "qty": 7,  "buy_price_usd": 135, "buy_date": "2025-01-10"}
+      ],
       "monthly_history": [
         {"month": "Ara", "price": 5500, "sales_qty": 17, "profit_margin_pct": 30.2},
         {"month": "Oca", "price": 5800, "sales_qty": 20, "profit_margin_pct": 32.1},
@@ -260,14 +270,15 @@
       "weight_kg": 0.7,
       "desi": 4,
       "tags": ["wireless", "noise-cancelling", "gaming"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/9/95/SteelSeries_logo.svg",
       "buy_currency": "USD",
-      "buy_price": 240,
-      "buy_date": "2025-02-11",
       "buy_exchange_rate": 33.00,
       "sales_per_week": 4,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 4, "buy_price_usd": 230, "buy_date": "2025-01-18"},
+        {"batch_id": "B02", "qty": 6, "buy_price_usd": 240, "buy_date": "2025-02-11"}
+      ],
       "monthly_history": [
-        {"month": "Ara", "price": 9999, "sales_qty": 13, "profit_margin_pct": 20.5},
+        {"month": "Ara", "price": 9999,  "sales_qty": 13, "profit_margin_pct": 20.5},
         {"month": "Oca", "price": 10500, "sales_qty": 15, "profit_margin_pct": 22.8},
         {"month": "Şub", "price": 10999, "sales_qty": 17, "profit_margin_pct": 23.6},
         {"month": "Mar", "price": 11200, "sales_qty": 16, "profit_margin_pct": 22.5},
@@ -285,14 +296,15 @@
       "weight_kg": 1.8,
       "desi": 5,
       "tags": ["pcie5", "wifi7", "enthusiast"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Gigabyte_Technology_logo.svg",
       "buy_currency": "USD",
-      "buy_price": 360,
-      "buy_date": "2025-02-23",
       "buy_exchange_rate": 33.40,
       "sales_per_week": 3,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 3, "buy_price_usd": 345, "buy_date": "2025-01-30"},
+        {"batch_id": "B02", "qty": 5, "buy_price_usd": 360, "buy_date": "2025-02-23"}
+      ],
       "monthly_history": [
-        {"month": "Ara", "price": 15500, "sales_qty": 9, "profit_margin_pct": 18.1},
+        {"month": "Ara", "price": 15500, "sales_qty": 9,  "profit_margin_pct": 18.1},
         {"month": "Oca", "price": 16200, "sales_qty": 11, "profit_margin_pct": 19.4},
         {"month": "Şub", "price": 16800, "sales_qty": 13, "profit_margin_pct": 20.7},
         {"month": "Mar", "price": 17500, "sales_qty": 12, "profit_margin_pct": 21.2},
@@ -310,12 +322,13 @@
       "weight_kg": 1.5,
       "desi": 4,
       "tags": ["silent", "air-cooler", "premium"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/8/80/Noctua_logo.svg",
       "buy_currency": "USD",
-      "buy_price": 92,
-      "buy_date": "2025-03-05",
       "buy_exchange_rate": 34.20,
       "sales_per_week": 6,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 10, "buy_price_usd": 88, "buy_date": "2025-02-10"},
+        {"batch_id": "B02", "qty": 12, "buy_price_usd": 92, "buy_date": "2025-03-05"}
+      ],
       "monthly_history": [
         {"month": "Ara", "price": 4299, "sales_qty": 20, "profit_margin_pct": 26.3},
         {"month": "Oca", "price": 4499, "sales_qty": 23, "profit_margin_pct": 28.9},
@@ -335,12 +348,13 @@
       "weight_kg": 0.1,
       "desi": 1,
       "tags": ["fast-storage", "gaming", "nvme"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/0/09/Western_Digital_Logo.svg",
       "buy_currency": "USD",
-      "buy_price": 180,
-      "buy_date": "2025-02-01",
       "buy_exchange_rate": 32.70,
       "sales_per_week": 7,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 12, "buy_price_usd": 170, "buy_date": "2025-01-15"},
+        {"batch_id": "B02", "qty": 15, "buy_price_usd": 180, "buy_date": "2025-02-01"}
+      ],
       "monthly_history": [
         {"month": "Ara", "price": 7200, "sales_qty": 24, "profit_margin_pct": 17.8},
         {"month": "Oca", "price": 7600, "sales_qty": 27, "profit_margin_pct": 19.2},
@@ -360,12 +374,13 @@
       "weight_kg": 2.2,
       "desi": 15,
       "tags": ["portable", "creator", "oled"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/2/2e/ASUS_Logo.svg",
       "buy_currency": "USD",
-      "buy_price": 1540,
-      "buy_date": "2025-01-25",
       "buy_exchange_rate": 32.60,
       "sales_per_week": 2,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 3, "buy_price_usd": 1490, "buy_date": "2024-12-28"},
+        {"batch_id": "B02", "qty": 3, "buy_price_usd": 1540, "buy_date": "2025-01-25"}
+      ],
       "monthly_history": [
         {"month": "Ara", "price": 63000, "sales_qty": 5, "profit_margin_pct": 10.2},
         {"month": "Oca", "price": 65000, "sales_qty": 7, "profit_margin_pct": 11.8},
@@ -385,12 +400,13 @@
       "weight_kg": 0.8,
       "desi": 4,
       "tags": ["oled", "stylus", "premium"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg",
       "buy_currency": "USD",
-      "buy_price": 1280,
-      "buy_date": "2025-03-20",
       "buy_exchange_rate": 34.80,
       "sales_per_week": 2,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 3, "buy_price_usd": 1240, "buy_date": "2025-02-28"},
+        {"batch_id": "B02", "qty": 4, "buy_price_usd": 1280, "buy_date": "2025-03-20"}
+      ],
       "monthly_history": [
         {"month": "Ara", "price": 51000, "sales_qty": 6, "profit_margin_pct": 12.5},
         {"month": "Oca", "price": 52500, "sales_qty": 7, "profit_margin_pct": 13.1},
@@ -410,12 +426,13 @@
       "weight_kg": 0.4,
       "desi": 2,
       "tags": ["flagship", "ai-camera", "5g"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/2/24/Samsung_Logo.svg",
       "buy_currency": "USD",
-      "buy_price": 1400,
-      "buy_date": "2025-02-27",
       "buy_exchange_rate": 33.80,
       "sales_per_week": 5,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 5, "buy_price_usd": 1350, "buy_date": "2025-02-01"},
+        {"batch_id": "B02", "qty": 7, "buy_price_usd": 1400, "buy_date": "2025-02-27"}
+      ],
       "monthly_history": [
         {"month": "Ara", "price": 65000, "sales_qty": 14, "profit_margin_pct": 8.9},
         {"month": "Oca", "price": 67500, "sales_qty": 17, "profit_margin_pct": 9.8},
@@ -435,18 +452,19 @@
       "weight_kg": 2.6,
       "desi": 6,
       "tags": ["wifi6e", "gaming-router", "mesh"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/2/2e/ASUS_Logo.svg",
       "buy_currency": "USD",
-      "buy_price": 340,
-      "buy_date": "2025-03-08",
       "buy_exchange_rate": 34.10,
       "sales_per_week": 3,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 4, "buy_price_usd": 325, "buy_date": "2025-02-15"},
+        {"batch_id": "B02", "qty": 5, "buy_price_usd": 340, "buy_date": "2025-03-08"}
+      ],
       "monthly_history": [
-        {"month": "Ara", "price": 13500, "sales_qty": 9, "profit_margin_pct": 21.4},
+        {"month": "Ara", "price": 13500, "sales_qty": 9,  "profit_margin_pct": 21.4},
         {"month": "Oca", "price": 14000, "sales_qty": 11, "profit_margin_pct": 22.8},
         {"month": "Şub", "price": 14500, "sales_qty": 12, "profit_margin_pct": 23.5},
         {"month": "Mar", "price": 14999, "sales_qty": 11, "profit_margin_pct": 22.9},
-        {"month": "Nis", "price": 15499, "sales_qty": 9, "profit_margin_pct": 20.6},
+        {"month": "Nis", "price": 15499, "sales_qty": 9,  "profit_margin_pct": 20.6},
         {"month": "May", "price": 15499, "sales_qty": 11, "profit_margin_pct": 20.6}
       ]
     },
@@ -460,12 +478,13 @@
       "weight_kg": 0.5,
       "desi": 2,
       "tags": ["streamer", "4k", "usb-c"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/7/7a/Corsair_logo.svg",
       "buy_currency": "USD",
-      "buy_price": 170,
-      "buy_date": "2025-01-30",
       "buy_exchange_rate": 32.90,
       "sales_per_week": 4,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 6,  "buy_price_usd": 162, "buy_date": "2024-12-20"},
+        {"batch_id": "B02", "qty": 8,  "buy_price_usd": 170, "buy_date": "2025-01-30"}
+      ],
       "monthly_history": [
         {"month": "Ara", "price": 7200, "sales_qty": 13, "profit_margin_pct": 24.8},
         {"month": "Oca", "price": 7600, "sales_qty": 15, "profit_margin_pct": 26.2},
@@ -485,12 +504,13 @@
       "weight_kg": 18.0,
       "desi": 30,
       "tags": ["ergonomic", "mesh", "premium"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/DXRacer_logo.svg",
       "buy_currency": "USD",
-      "buy_price": 390,
-      "buy_date": "2025-02-16",
       "buy_exchange_rate": 33.20,
       "sales_per_week": 1,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 2, "buy_price_usd": 375, "buy_date": "2025-01-10"},
+        {"batch_id": "B02", "qty": 3, "buy_price_usd": 390, "buy_date": "2025-02-16"}
+      ],
       "monthly_history": [
         {"month": "Ara", "price": 16500, "sales_qty": 3, "profit_margin_pct": 25.1},
         {"month": "Oca", "price": 17200, "sales_qty": 4, "profit_margin_pct": 26.4},
@@ -510,12 +530,13 @@
       "weight_kg": 0.8,
       "desi": 3,
       "tags": ["rgb", "streaming", "usb"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/HyperX_logo.svg",
       "buy_currency": "USD",
-      "buy_price": 105,
-      "buy_date": "2025-03-12",
       "buy_exchange_rate": 34.30,
       "sales_per_week": 5,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 8,  "buy_price_usd": 98,  "buy_date": "2025-02-20"},
+        {"batch_id": "B02", "qty": 8,  "buy_price_usd": 105, "buy_date": "2025-03-12"}
+      ],
       "monthly_history": [
         {"month": "Ara", "price": 4999, "sales_qty": 17, "profit_margin_pct": 32.5},
         {"month": "Oca", "price": 5200, "sales_qty": 19, "profit_margin_pct": 33.8},
@@ -535,12 +556,13 @@
       "weight_kg": 5.2,
       "desi": 12,
       "tags": ["gaming", "8k", "ray-tracing"],
-      "logo_url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Sony_Interactive_Entertainment_logo.svg",
       "buy_currency": "USD",
-      "buy_price": 780,
-      "buy_date": "2025-02-25",
       "buy_exchange_rate": 33.60,
       "sales_per_week": 6,
+      "inventory_batches": [
+        {"batch_id": "B01", "qty": 4, "buy_price_usd": 750, "buy_date": "2025-01-20"},
+        {"batch_id": "B02", "qty": 6, "buy_price_usd": 780, "buy_date": "2025-02-25"}
+      ],
       "monthly_history": [
         {"month": "Ara", "price": 36000, "sales_qty": 18, "profit_margin_pct": 11.2},
         {"month": "Oca", "price": 37500, "sales_qty": 21, "profit_margin_pct": 12.8},
@@ -556,21 +578,21 @@
     {
       "name": "GameGaraj",
       "listings": [
-        { "sku": "MSI-RAIDER-GE78-RTX4080", "price_tl": 97500, "stock": "var" },
-        { "sku": "SSD-2TB-SAMSUNG-990PRO",  "price_tl": 4199,  "stock": "var" },
-        { "sku": "GPU-ASUS-RTX4090-ROG",    "price_tl": 109999,"stock": "yok" },
-        { "sku": "CPU-AMD-RYZEN9-9950X",    "price_tl": 25999, "stock": "var" },
-        { "sku": "MONITOR-LG-ULTRAGEAR-32", "price_tl": 44899, "stock": "var" }
+        {"sku": "MSI-RAIDER-GE78-RTX4080", "price_tl": 97500,  "stock": "var"},
+        {"sku": "SSD-2TB-SAMSUNG-990PRO",  "price_tl": 4199,   "stock": "var"},
+        {"sku": "GPU-ASUS-RTX4090-ROG",    "price_tl": 109999, "stock": "yok"},
+        {"sku": "CPU-AMD-RYZEN9-9950X",    "price_tl": 25999,  "stock": "var"},
+        {"sku": "MONITOR-LG-ULTRAGEAR-32", "price_tl": 44899,  "stock": "var"}
       ]
     },
     {
       "name": "ITopya",
       "listings": [
-        { "sku": "MSI-RAIDER-GE78-RTX4080", "price_tl": 94999, "stock": "var" },
-        { "sku": "SSD-2TB-SAMSUNG-990PRO",  "price_tl": 3999,  "stock": "var" },
-        { "sku": "GPU-ASUS-RTX4090-ROG",    "price_tl": 107499,"stock": "var" },
-        { "sku": "CPU-AMD-RYZEN9-9950X",    "price_tl": 25299, "stock": "var" },
-        { "sku": "MONITOR-LG-ULTRAGEAR-32", "price_tl": 43999, "stock": "yok" }
+        {"sku": "MSI-RAIDER-GE78-RTX4080", "price_tl": 94999,  "stock": "var"},
+        {"sku": "SSD-2TB-SAMSUNG-990PRO",  "price_tl": 3999,   "stock": "var"},
+        {"sku": "GPU-ASUS-RTX4090-ROG",    "price_tl": 107499, "stock": "var"},
+        {"sku": "CPU-AMD-RYZEN9-9950X",    "price_tl": 25299,  "stock": "var"},
+        {"sku": "MONITOR-LG-ULTRAGEAR-32", "price_tl": 43999,  "stock": "yok"}
       ]
     }
   ],
@@ -586,13 +608,11 @@
   },
 
   "trends": {
-    "hot_games": [
-      "Elden Ring 2", "Battlefield 6", "Cyberpunk 2078", "GTA VI", "The Witcher 4"
-    ],
+    "hot_games": ["Elden Ring 2","Battlefield 6","Cyberpunk 2078","GTA VI","The Witcher 4"],
     "recommended_hardware": {
       "Battlefield 6":  ["GPU: RTX 4080+", "RAM: 32GB", "SSD: 2TB NVMe"],
       "Cyberpunk 2078": ["GPU: RTX 4090",  "RAM: 64GB", "SSD: 2TB NVMe"],
-      "GTA VI":         ["GPU: RTX 4070 Ti","RAM: 32GB", "SSD: 1TB NVMe"]
+      "GTA VI":         ["GPU: RTX 4070 Ti","RAM: 32GB","SSD: 1TB NVMe"]
     },
     "trending_skus": [
       "SSD-2TB-SAMSUNG-990PRO",
@@ -603,11 +623,11 @@
   },
 
   "sales_history": [
-    { "ay": "Aralık 2024", "net_kar_tl": 41200, "enflasyon_yuzdesi": 2.5 },
-    { "ay": "Ocak 2025",   "net_kar_tl": 38700, "enflasyon_yuzdesi": 2.6 },
-    { "ay": "Şubat 2025",  "net_kar_tl": 43500, "enflasyon_yuzdesi": 2.7 },
-    { "ay": "Mart 2025",   "net_kar_tl": 51800, "enflasyon_yuzdesi": 2.9 },
-    { "ay": "Nisan 2025",  "net_kar_tl": 49300, "enflasyon_yuzdesi": 2.8 },
-    { "ay": "Mayıs 2025",  "net_kar_tl": 57600, "enflasyon_yuzdesi": 3.1 }
+    {"ay": "Aralık 2024", "net_kar_tl": 41200, "enflasyon_yuzdesi": 2.5},
+    {"ay": "Ocak 2025",   "net_kar_tl": 38700, "enflasyon_yuzdesi": 2.6},
+    {"ay": "Şubat 2025",  "net_kar_tl": 43500, "enflasyon_yuzdesi": 2.7},
+    {"ay": "Mart 2025",   "net_kar_tl": 51800, "enflasyon_yuzdesi": 2.9},
+    {"ay": "Nisan 2025",  "net_kar_tl": 49300, "enflasyon_yuzdesi": 2.8},
+    {"ay": "Mayıs 2025",  "net_kar_tl": 57600, "enflasyon_yuzdesi": 3.1}
   ]
 }

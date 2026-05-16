@@ -16,69 +16,78 @@ def _build_micro_prompt(
     competitor_info: dict,
     trend_skus: list,
 ) -> str:
-    """
-    Tek bir SKU için kısa ve odaklı mikro-prompt üretir.
-    Gemini'den sadece tek bir JSON objesi {} ister.
-    V7: old_price_tl ve price_change_pct alanları zorunlu hale getirildi.
-    """
-    metrics = cost_metrics.get(sku, {})
-    comp    = competitor_info.get(sku, {})
+    metrics       = cost_metrics.get(sku, {})
+    comp          = competitor_info.get(sku, {})
+    current_price = metrics.get("our_price_tl", 0)
+    fifo_cost     = metrics.get("fifo_cost_tl", metrics.get("total_cost_tl", 0))
+    weekly_sales  = metrics.get("sales_per_week", 0)
 
     rival_lines = "; ".join(
         f"{r['name']}: {r['price_tl']} TL ({'stokta' if r['in_stock'] else 'stok yok'})"
         for r in comp.get("competitors", [])
     ) or "Rakip verisi yok."
 
-    is_trending  = "EVET" if sku in trend_skus else "HAYIR"
-    current_price = metrics.get('our_price_tl', 0)
+    is_trending = "EVET" if sku in trend_skus else "HAYIR"
 
-    return f"""Sen bir e-ticaret kâr optimizasyon motorusun. Tek ürün analizi yapacaksın.
+    # Ölü stok tespiti (4 haftada <4 adet)
+    monthly_sales = weekly_sales * 4 if weekly_sales else 0
+    is_dead_stock = monthly_sales < 4
+
+    return f"""Sen bir e-ticaret kâr ve stok optimizasyon motorusun. Tek ürün analizi yapacaksın.
 
 ÜRÜN: {sku}
 ─────────────────────────────────────
-Mevcut Fiyat    : {current_price} TL
-Toplam Maliyet  : {metrics.get('total_cost_tl', '?')} TL
-Kırmızı Çizgi  : {metrics.get('red_line_price_tl', '?')} TL  ← asla altına inme
-Mevcut Marj     : %{metrics.get('current_margin_pct', '?')}
-Durum           : {metrics.get('health', '?')} — {metrics.get('health_note', '')}
-Rakip Pozisyon  : {comp.get('position', '?')}
-Rakipler        : {rival_lines}
-Trend Ürünü     : {is_trending}
+Mevcut Fiyat     : {current_price} TL
+FIFO Birim Maliyet: {fifo_cost} TL
+Toplam Maliyet   : {metrics.get('total_cost_tl', '?')} TL
+Kırmızı Çizgi   : {metrics.get('red_line_price_tl', '?')} TL  ← asla altına inme
+Mevcut Marj      : %{metrics.get('current_margin_pct', '?')}
+Durum            : {metrics.get('health', '?')} — {metrics.get('health_note', '')}
+Rakip Pozisyon   : {comp.get('position', '?')}
+Rakipler         : {rival_lines}
+Trend Ürünü      : {is_trending}
+Ölü Stok mu?     : {"EVET — aylık {monthly_sales} adet satış" if is_dead_stock else "HAYIR"}
 ─────────────────────────────────────
 
 KARAR KURALLARI:
-1. Mevcut Fiyat < Kırmızı Çizgi (KRİTİK) → ya fiyatı kırmızı çizginin %2-%3 üstüne çıkar (price_update), ya da başka bir yüksek marjlı SKU ile paket yap (create_bundle).
-2. Marj yeterli ve rakip stokta yok → mevcut durumu koru (hold).
-3. Kırmızı çizginin ALTINA düşen hiçbir fiyat önerme.
+1. KRİTİK durum (fiyat < kırmızı çizgi): price_update ile kırmızı çizginin %2-3 üstüne çıkar.
+2. Ölü stok (aylık <4 adet, sağlıklı marj): smart_bundle veya gift_with_purchase öner.
+3. Ölü stok (aylık <4 adet, düşük marj): dynamic_markdown ile %2-5 kademeli düşür.
+4. Ölü stok + KRİTİK: liquidate (B2B toptancıya zararına sat, stoğu temizle).
+5. Marj yeterli + rakip stokta yok: hold.
+6. Kırmızı çizginin ALTINA düşen hiçbir fiyat önerme (liquidate hariç — o ayrı kanal).
 
 ÇIKTI FORMATI (ZORUNLU):
-Sadece tek bir JSON objesi döndür. Markdown, açıklama, giriş cümlesi YASAK.
+Sadece tek bir JSON objesi döndür. Markdown, açıklama YASAK.
 
-price_update için (old_price_tl ve price_change_pct ZORUNLU):
-{{"action_type": "price_update", "sku": "{sku}", "old_price_tl": {current_price}, "new_price_tl": <sayi>, "price_change_pct": <yuzde_degisim_float>, "reason": "<kisa gerekce>", "button_label": "<buton metni>"}}
+Seçenekler:
 
-create_bundle için:
-{{"action_type": "create_bundle", "skus": ["{sku}", "<diger_sku>"], "old_price_tl": {current_price}, "bundle_price_tl": <sayi>, "price_change_pct": <yuzde_degisim_float>, "reason": "<kisa gerekce>", "button_label": "<buton metni>"}}
+price_update:
+{{"action_type":"price_update","sku":"{sku}","old_price_tl":{current_price},"new_price_tl":<sayi>,"price_change_pct":<float>,"reason":"<gerekce>","button_label":"<metin>"}}
 
-hold için:
-{{"action_type": "hold", "sku": "{sku}", "old_price_tl": {current_price}, "reason": "<kisa gerekce>", "button_label": "<buton metni>"}}
+smart_bundle:
+{{"action_type":"smart_bundle","sku":"{sku}","bundle_with_sku":"<lokomotif_sku>","old_price_tl":{current_price},"bundle_price_tl":<sayi>,"reason":"<gerekce>","button_label":"<metin>"}}
 
-price_change_pct hesaplama: ((new_price - old_price) / old_price) * 100, iki ondalık basamak.
+dynamic_markdown:
+{{"action_type":"dynamic_markdown","sku":"{sku}","old_price_tl":{current_price},"new_price_tl":<sayi>,"markdown_pct":<float_2_ile_5_arasi>,"steps":3,"reason":"<gerekce>","button_label":"<metin>"}}
+
+gift_with_purchase:
+{{"action_type":"gift_with_purchase","sku":"{sku}","trigger_basket_tl":50000,"old_price_tl":{current_price},"reason":"<gerekce>","button_label":"<metin>"}}
+
+liquidate:
+{{"action_type":"liquidate","sku":"{sku}","old_price_tl":{current_price},"b2b_price_tl":<maliyet_altı_fiyat>,"reason":"<gerekce>","button_label":"<metin>"}}
+
+hold:
+{{"action_type":"hold","sku":"{sku}","old_price_tl":{current_price},"reason":"<gerekce>","button_label":"<metin>"}}
 """
 
 
 def _parse_single_action(raw: str) -> dict | None:
-    """
-    Gemini'nin tek obje {} çıktısını parse eder.
-    Başarısız olursa None döner, sistemi çökertmez.
-    """
-    # Markdown artıklarını temizle
     cleaned = re.sub(r"^```json\s*", "", raw.strip(), flags=re.MULTILINE)
     cleaned = re.sub(r"^```\s*",     "", cleaned,     flags=re.MULTILINE)
     cleaned = re.sub(r"\s*```$",     "", cleaned,     flags=re.MULTILINE)
     cleaned = cleaned.strip()
 
-    # Doğrudan parse dene
     try:
         parsed = json.loads(cleaned)
         if isinstance(parsed, dict):
@@ -86,7 +95,6 @@ def _parse_single_action(raw: str) -> dict | None:
     except json.JSONDecodeError:
         pass
 
-    # Fallback: metinde ilk {...} bloğunu bul
     obj_match = re.search(r"\{.*\}", cleaned, re.DOTALL)
     if obj_match:
         try:
@@ -100,41 +108,32 @@ def _parse_single_action(raw: str) -> dict | None:
 
 
 def strategist_agent(state: AgentState) -> dict:
-    """
-    Stratejist Ajan — İteratif Mikro-İşlem Mimarisi:
-    Her SKU için ayrı bir kısa prompt gönderir, tek JSON objesi alır.
-    Truncation riski sıfıra iner; rate limit için her adımda sleep uygulanır.
-    """
     errors            = []
     suggested_actions = []
 
-    # ── API Kurulumu ──────────────────────────────────────────────────
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
-        errors.append("strategist_agent: GEMINI_API_KEY bulunamadı. .env dosyasını kontrol et.")
+        errors.append("strategist_agent: GEMINI_API_KEY bulunamadı.")
         return {"final_strategy": "", "suggested_actions": [], "errors": errors}
 
     try:
         genai.configure(api_key=api_key)
-        # gemini-1.5-flash: Yüksek RPM limiti, düşük maliyet, günlük kotaya uygun.
         model = genai.GenerativeModel(model_name="gemini-2.5-flash-lite")
     except Exception as e:
         errors.append(f"strategist_agent: Gemini yapılandırma hatası — {e}")
         return {"final_strategy": "", "suggested_actions": [], "errors": errors}
 
-    # ── State Verilerini Al ───────────────────────────────────────────
     competitor_analysis = state.get("competitor_analysis", {})
     cost_metrics        = state.get("cost_metrics", {})
     trending_skus       = state.get("trending_skus", [])
 
     if not competitor_analysis:
-        errors.append("strategist_agent: competitor_analysis boş, analiz yapılamadı.")
+        errors.append("strategist_agent: competitor_analysis boş.")
         return {"final_strategy": "", "suggested_actions": [], "errors": errors}
 
-    # ── İteratif Mikro-İşlem Döngüsü ─────────────────────────────────
     print("\n" + "=" * 55)
-    print("🤖 BEDÜLONCA STRATEJİST MOTORU BAŞLADI")
-    print(f"   Toplam ürün: {len(competitor_analysis)}")
+    print("🤖 BEDÜLONCA STRATEJİST V9 BAŞLADI")
+    print(f"   Model: gemini-1.5-flash | Ürün: {len(competitor_analysis)}")
     print("=" * 55)
 
     for sku in competitor_analysis:
@@ -147,55 +146,53 @@ def strategist_agent(state: AgentState) -> dict:
             trend_skus=trending_skus,
         )
 
-        # ── Gemini Çağrısı ────────────────────────────────────────────
         try:
             response = model.generate_content(
                 micro_prompt,
                 generation_config={"temperature": 0.2},
             )
-
             raw_text = response.text
-            print(f"   📥 Ham çıktı: {raw_text[:120].strip()}{'...' if len(raw_text) > 120 else ''}")
-
+            print(f"   📥 {raw_text[:100].strip()}{'...' if len(raw_text) > 100 else ''}")
         except Exception as e:
-            err_msg = f"strategist_agent: {sku} için API çağrısı başarısız — {e}"
+            err_msg = f"strategist_agent: {sku} API hatası — {e}"
             errors.append(err_msg)
             print(f"   ❌ {err_msg}")
-            time.sleep(3)
+            time.sleep(4)
             continue
 
-        # ── Parse ─────────────────────────────────────────────────────
         action = _parse_single_action(raw_text)
         if action is None:
-            err_msg = f"strategist_agent: {sku} için JSON parse başarısız. Ham: {raw_text[:200]}"
+            err_msg = f"strategist_agent: {sku} parse başarısız. Ham: {raw_text[:200]}"
             errors.append(err_msg)
-            print(f"   ⚠️  Parse başarısız, sonraki ürüne geçiliyor.")
-            time.sleep(3)
+            time.sleep(4)
             continue
 
         suggested_actions.append(action)
-        print(f"   ✅ {sku} tamamlandı. → action_type: {action.get('action_type', '?')}")
-
-        # Rate limit koruması
-        time.sleep(3)
+        print(f"   ✅ → action_type: {action.get('action_type', '?')}")
+        time.sleep(4)
 
     print("\n" + "=" * 55)
-    print(f"🏁 Motor tamamlandı. {len(suggested_actions)}/{len(competitor_analysis)} ürün işlendi.")
+    print(f"🏁 {len(suggested_actions)}/{len(competitor_analysis)} ürün işlendi.")
     print("=" * 55 + "\n")
 
-    # ── Özet Strateji Metni ───────────────────────────────────────────
-    kritik_count = sum(1 for a in suggested_actions if a.get("action_type") == "price_update")
-    bundle_count = sum(1 for a in suggested_actions if a.get("action_type") == "create_bundle")
-    hold_count   = sum(1 for a in suggested_actions if a.get("action_type") == "hold")
+    kritik   = sum(1 for a in suggested_actions if a.get("action_type") == "price_update")
+    bundle   = sum(1 for a in suggested_actions if a.get("action_type") == "smart_bundle")
+    markdown = sum(1 for a in suggested_actions if a.get("action_type") == "dynamic_markdown")
+    gift     = sum(1 for a in suggested_actions if a.get("action_type") == "gift_with_purchase")
+    liq      = sum(1 for a in suggested_actions if a.get("action_type") == "liquidate")
+    hold     = sum(1 for a in suggested_actions if a.get("action_type") == "hold")
 
     final_strategy = (
-        f"**Otonom motor {len(competitor_analysis)} ürünü tek tek taradı ve "
+        f"**Otonom motor {len(competitor_analysis)} ürünü taradı, "
         f"{len(suggested_actions)} karar üretti.**\n\n"
-        f"- 🔴 **{kritik_count} ürün** kırmızı çizgi protokolüne alındı — fiyat düzeltmesi gerekiyor.\n"
-        f"- 🟢 **{bundle_count} ürün** için çapraz satış (bundle) fırsatı tespit edildi.\n"
-        f"- ⚫ **{hold_count} ürün** mevcut pozisyonunu koruyor — rakip baskısı yok.\n\n"
-        f"Kırmızı çizgi kalkanı aktifti: zararına satış önerisinin önüne geçildi. "
-        f"Aşağıdaki aksiyonları onaylamak için ilgili butona bas."
+        f"| Strateji | Ürün Sayısı |\n|---|---|\n"
+        f"| 🔴 Fiyat Düzeltme | {kritik} |\n"
+        f"| 🟢 Smart Bundle | {bundle} |\n"
+        f"| 🟡 Kademeli İndirim | {markdown} |\n"
+        f"| 🎁 Sepet Büyütücü Hediye | {gift} |\n"
+        f"| 💀 Tasfiye (B2B) | {liq} |\n"
+        f"| ⚫ Pozisyon Koru | {hold} |\n\n"
+        f"FIFO maliyet algoritması aktifti: her ürünün gerçek stok maliyeti hesaplandı."
     )
 
     return {

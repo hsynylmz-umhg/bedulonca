@@ -31,5 +31,7 @@ class AgentState(TypedDict):
     # Market Ajanı Tarama Logu
     crawl_log: str
 
+    market_news: str
+
     # Hata ve Log Yönetimi
     errors: Annotated[List[str], operator.add]

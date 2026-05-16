@@ -1,120 +1,137 @@
 # agents/cost_agent.py
+"""
+FIFO Maliyet Ajanı
+- inventory_batches dizisini okur
+- Satılan adetleri en eski partiden başlayarak düşer
+- FIFO maliyeti, kırmızı çizgiyi ve marjı hesaplar
+"""
 import json
 from pathlib import Path
 from state import AgentState
 
 DATA_PATH = Path(__file__).parent.parent / "data" / "mock_data.json"
 
-def cost_agent(state: AgentState) -> dict:
+
+def _load_data() -> dict:
+    with open(DATA_PATH, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def _fifo_cost(product: dict, current_usd_rate: float) -> dict:
     """
-    Maliyet Ajanı: Her SKU için gerçek maliyeti, kırmızı çizgiyi
-    (minimum satış fiyatı) ve mevcut marj durumunu hesaplar.
-    Asla zararına satışa izin vermez.
+    FIFO algoritması:
+    - inventory_batches dizisini tarihsel sıraya göre işler.
+    - Toplam stok içinden satılmış kabul edilen miktarı (sales_per_week * 4)
+      en eski partilerden düşerek kalan stoğun gerçek FIFO maliyetini bulur.
+    - Kalan stok tamamen en eski partide ise onun maliyetini,
+      birden fazla partiye yayılıyorsa ağırlıklı ortalama kullanır.
     """
-    errors = []
-    cost_metrics = {}
+    batches      = product.get("inventory_batches", [])
+    buy_currency = product.get("buy_currency", "USD")
+    is_usd       = buy_currency == "USD"
 
-    try:
-        with open(DATA_PATH, "r", encoding="utf-8") as f:
-            data = json.load(f)
-    except FileNotFoundError:
-        errors.append("cost_agent: mock_data.json bulunamadı.")
-        return {"cost_metrics": {}, "errors": errors}
-    except json.JSONDecodeError as e:
-        errors.append(f"cost_agent: JSON parse hatası — {e}")
-        return {"cost_metrics": {}, "errors": errors}
+    if not batches:
+        # Eski veri uyumluluğu: inventory_batches yoksa cost_price_tl kullan
+        cost_tl = product.get("cost_price_tl", 0)
+        return {
+            "fifo_unit_cost_tl": cost_tl,
+            "fifo_method":       "legacy",
+            "batches_detail":    [],
+        }
 
-    try:
-        cfg      = data["market_config"]
-        products = data["products"]
+    # Satılmış kabul edilen adet (son 4 haftalık satış)
+    sold_qty = product.get("sales_per_week", 0) * 4
 
-        commission_pct      = cfg["marketplace_commission_pct"] / 100
-        cargo_base          = cfg["cargo_base_tl"]
-        cargo_per_desi      = cfg["cargo_per_desi_tl"]
-        inflation_pct       = cfg["monthly_inflation_pct"] / 100
-        warehouse_monthly   = cfg["warehouse_monthly_cost_tl"]
-        min_margin_pct      = cfg["min_margin_pct"] / 100
+    # Kalan stoğu FIFO ile takip et
+    remaining_sold = sold_qty
+    remaining_batches = []
 
-        # Depo maliyetini ürün başına dağıt (stok ağırlıklı)
-        total_stock = sum(p["stock_qty"] for p in products)
-        if total_stock == 0:
-            errors.append("cost_agent: Toplam stok sıfır, depo maliyet dağılımı yapılamadı.")
-            return {"cost_metrics": {}, "errors": errors}
+    for batch in batches:
+        qty = batch["qty"]
+        if remaining_sold <= 0:
+            remaining_batches.append({"qty": qty, "buy_price_usd": batch["buy_price_usd"]})
+            continue
+        if remaining_sold >= qty:
+            remaining_sold -= qty
+            # Bu parti tamamen satıldı, kalan stoka katılmaz
+        else:
+            leftover = qty - remaining_sold
+            remaining_batches.append({"qty": leftover, "buy_price_usd": batch["buy_price_usd"]})
+            remaining_sold = 0
 
-        for product in products:
-            sku        = product["sku"]
-            cost_price = product["cost_price_tl"]
-            our_price  = product["our_price_tl"]
-            desi       = product["desi"]
-            stock_qty  = product["stock_qty"]
+    # Kalan partilerin ağırlıklı ortalama maliyetini hesapla
+    total_qty  = sum(b["qty"] for b in remaining_batches)
+    if total_qty == 0:
+        # Tüm stok satılmış, son partinin maliyetini al
+        last = batches[-1]
+        raw_price = last["buy_price_usd"]
+    else:
+        raw_price = sum(b["buy_price_usd"] * b["qty"] for b in remaining_batches) / total_qty
 
-            # --- Maliyet Bileşenleri ---
-            cargo_cost       = cargo_base + (desi * cargo_per_desi)
-            commission_cost  = round(our_price * commission_pct, 2)
-
-            # Enflasyon etkisi: alış maliyetini gelecek aya project et
-            inflation_adj_cost = round(cost_price * (1 + inflation_pct), 2)
-
-            # Depo maliyeti: bu SKU'nun stok payı oranında
-            stock_share            = stock_qty / total_stock
-            warehouse_cost_total   = warehouse_monthly * stock_share
-            warehouse_cost         = round(warehouse_cost_total / stock_qty, 2)  # BİRİM BAŞI
-
-            # Toplam maliyet (satış başına)
-            total_cost = round(inflation_adj_cost + cargo_cost + commission_cost + warehouse_cost, 2)
-
-            # --- Kırmızı Çizgi ---
-            # min_margin_pct hedef marjı koruyarak minimum satış fiyatı
-            red_line_price = round(total_cost / (1 - min_margin_pct), 2)
-
-            # --- Mevcut Durum ---
-            current_margin_tl  = round(our_price - total_cost, 2)
-            current_margin_pct = round((current_margin_tl / our_price) * 100, 1)
-            is_above_red_line  = our_price >= red_line_price
-
-            # --- Sağlık Durumu ---
-            if not is_above_red_line:
-                health = "KRİTİK"
-                health_note = (
-                    f"Mevcut fiyat kırmızı çizginin "
-                    f"{round(red_line_price - our_price, 2)} TL ALTINDA. "
-                    "Acil fiyat düzeltmesi gerekli."
-                )
-            elif current_margin_pct < min_margin_pct * 100 * 1.2:  # %20 tampon
-                health = "UYARI"
-                health_note = (
-                    f"Marj kırmızı çizgiye yakın (%{current_margin_pct}). "
-                    "Fiyat artışı veya maliyet optimizasyonu önerilir."
-                )
-            else:
-                health = "SAĞLIKLI"
-                health_note = f"Marj hedefin üzerinde (%{current_margin_pct}). Strateji esnekliği mevcut."
-
-            cost_metrics[sku] = {
-                # Ham bileşenler
-                "cost_price_tl":        cost_price,
-                "inflation_adj_cost_tl": inflation_adj_cost,
-                "cargo_cost_tl":        cargo_cost,
-                "commission_cost_tl":   commission_cost,
-                "warehouse_cost_tl":     warehouse_cost,   # birim başı
-                "total_cost_tl":        total_cost,
-                # Kırmızı çizgi
-                "red_line_price_tl":    red_line_price,
-                # Mevcut durum
-                "our_price_tl":         our_price,
-                "current_margin_tl":    current_margin_tl,
-                "current_margin_pct":   current_margin_pct,
-                "is_above_red_line":    is_above_red_line,
-                # Sağlık özeti (Gemini'ye ön-sindirilmiş)
-                "health":               health,
-                "health_note":          health_note,
-            }
-
-    except KeyError as e:
-        errors.append(f"cost_agent: Eksik veri anahtarı — {e}")
-        return {"cost_metrics": cost_metrics, "errors": errors}
+    # TL'ye çevir
+    if is_usd:
+        fifo_cost_tl = raw_price * current_usd_rate
+    else:
+        fifo_cost_tl = raw_price  # TRY ise zaten TL
 
     return {
-        "cost_metrics": cost_metrics,
-        "errors": errors,
+        "fifo_unit_cost_tl": round(fifo_cost_tl, 2),
+        "fifo_method":       "fifo_weighted",
+        "batches_detail":    remaining_batches,
     }
+
+
+def cost_agent(state: AgentState) -> dict:
+    data         = _load_data()
+    cfg          = data["market_config"]
+    usd_rate     = cfg.get("current_usd_rate", 38.50)
+    min_margin   = cfg.get("min_margin_pct", 12.0) / 100
+    commission   = cfg.get("marketplace_commission_pct", 8.5) / 100
+    cargo_base   = cfg.get("cargo_base_tl", 45)
+    cargo_desi   = cfg.get("cargo_per_desi_tl", 12)
+
+    cost_metrics: dict = {}
+
+    for p in data["products"]:
+        sku       = p["sku"]
+        sell_price = p["our_price_tl"]
+        desi      = p.get("desi", 1)
+
+        fifo_info    = _fifo_cost(p, usd_rate)
+        fifo_cost_tl = fifo_info["fifo_unit_cost_tl"]
+
+        cargo_cost   = cargo_base + (cargo_desi * desi)
+        commission_c = sell_price * commission
+        total_cost   = fifo_cost_tl + cargo_cost + commission_c
+
+        # Kırmızı çizgi: min_margin karşılayan en düşük satış fiyatı
+        # total_cost / (1 - min_margin)
+        red_line     = round(total_cost / (1 - min_margin), 2)
+        current_margin = round(((sell_price - total_cost) / sell_price) * 100, 2) if sell_price else 0
+
+        if sell_price < red_line:
+            health      = "KRİTİK"
+            health_note = f"Fiyat kırmızı çizginin {fmt(red_line - sell_price)} altında"
+        elif current_margin < min_margin * 100 * 1.2:
+            health      = "UYARI"
+            health_note = f"Marj hedefin %20 yakınında ({current_margin:.1f}%)"
+        else:
+            health      = "SAĞLIKLI"
+            health_note = f"Marj hedefin üzerinde ({current_margin:.1f}%)"
+
+        cost_metrics[sku] = {
+            "our_price_tl":       sell_price,
+            "fifo_cost_tl":       fifo_cost_tl,
+            "total_cost_tl":      round(total_cost, 2),
+            "red_line_price_tl":  red_line,
+            "current_margin_pct": current_margin,
+            "health":             health,
+            "health_note":        health_note,
+            "fifo_method":        fifo_info["fifo_method"],
+        }
+
+    return {"cost_metrics": cost_metrics}
+
+
+def fmt(v: float) -> str:
+    return f"₺{v:,.0f}".replace(",", ".")
