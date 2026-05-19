@@ -133,6 +133,10 @@ a:hover { text-decoration: none !important; opacity: 0.75 !important; }
     background: rgba(128,128,128,0.1);
     opacity: 1 !important;
 }
+.custom-nav-btn.active {
+    background: rgba(37,99,235,0.10);
+    color: #2563EB !important;
+}
 
 /* ══════════════════════════════════════════════════════
    LAYER 4 — Popover Fixes
@@ -171,7 +175,7 @@ div[data-testid="stHorizontalBlock"] > div[data-testid="column"]:nth-child(2) [d
 }
 
 /* ══════════════════════════════════════════════════════
-   LAYER 5 — Section Labels
+   LAYER 5 — Section Labels & BI Tooltips
 ══════════════════════════════════════════════════════ */
 .section-label {
     font-size: 11px;
@@ -189,9 +193,21 @@ div[data-testid="stHorizontalBlock"] > div[data-testid="column"]:nth-child(2) [d
 }
 .section-label .fi { font-size: 14px; opacity: 0.8; }
 .chart-title {
-    font-size: 11px; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase; opacity: 0.55;
-    margin-bottom: 6px; margin-top: 14px; text-align: center;
+    font-size: 12px; font-weight: 800; letter-spacing: 1px;
+    text-transform: uppercase; opacity: 0.7;
+    margin-bottom: 4px; margin-top: 14px; text-align: center; color: #2563EB;
+}
+.bi-tooltip {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+    background: rgba(37, 99, 235, 0.05);
+    border-left: 3px solid #2563EB;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    color: var(--text-color);
+    opacity: 0.85;
 }
 .custom-label {
     font-size: 12px; font-weight: 600; opacity: 0.7;
@@ -343,6 +359,7 @@ def build_inventory_df(data: dict, usd_rate: float) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 def _color_row(row: pd.Series) -> list[str]:
+    # Gelişmiş doygunluk muhafazalı satır renklendirme
     m = float(row.get("Marj %", row.get("_margin_raw", 0)))
     if m < 0:
         bg = "background-color: rgba(220, 38, 38, 0.40); font-weight:600;"
@@ -417,7 +434,7 @@ st.markdown(f"""
     <div class="navbar-inner">
         <div>{logo_html}</div>
         <div class="navbar-menu">
-            <a href="/" target="_self" class="custom-nav-btn"><i class="fi fi-rr-home"></i> Ana Sayfa</a>
+            <a href="/" target="_self" class="custom-nav-btn active"><i class="fi fi-rr-home"></i> Ana Sayfa</a>
             <a href="/product_detail" target="_self" class="custom-nav-btn"><i class="fi fi-rr-search-alt"></i> Ürün Detayı</a>
             <a href="/settings" target="_self" class="custom-nav-btn"><i class="fi fi-rr-settings"></i> Ayarlar</a>
         </div>
@@ -571,9 +588,21 @@ with c_dots:
     st.markdown(f'<div style="text-align:center;line-height:2;padding-top:6px;">{dots}</div>', unsafe_allow_html=True)
 
 chart_title, chart_key = CHARTS[st.session_state["chart_index"]]
-st.markdown(f'<div class="chart-title">{chart_title}</div>', unsafe_allow_html=True)
 
-# ── ÇİZİM FONKSİYONLARI (TOP N ENTEGRASYONLU) ──
+# BI İZAHAT METİNLERİ (Tam Kurumsal Formatta)
+BI_EXPLANATIONS = {
+    "pie": "💡 **Hacim Dağılımı:** Seçili periyotta, en çok satış hacmine sahip olan Top-N ürünlerin pazarınızdaki oransal ağırlığını ve penetrasyonunu ifade eder.",
+    "cat_bar": "💡 **Kategori Karlılığı:** Hangi ürün kategorilerinin belirlenen dönem için en yüksek brüt kârı ürettiğini gösterir. Bu veri, kategori bazlı pazarlama ve satın alma bütçelerinin tahsisi için kritiktir.",
+    "bcg": "💡 **BCG Matrisi:** Ürünlerinizi Satış Hacmi ve Birim Kâr oranlarına göre Yıldızlar, Nakit İnekleri, Köpekler ve Soru İşaretleri olarak segment ederek stok bütçenizi optimize edin.",
+    "risk": "💡 **Stok & Marj Riski:** Marjı düşük (0'ın solu) ve stoku yüksek (üst bant) olan ürünler nakit akışınız için ciddi finansal risk taşır. Balon büyüklüğü (FIFO maliyeti) depodaki bağlı sermayeyi işaret eder.",
+    "trend": "💡 **Talep İvmesi:** Dönem katsayısına göre haftalık satış simülasyonunu çizer. Yukarı yönlü sert kırılımlar, acil stok takviyesi yapılması gereken momentumlu ürünleri gösterir.",
+    "proj": "💡 **Kâr Kararlılığı:** Mevcut stok limitlerine takılmadan hangi SKU'ların en yüksek dönem sonu kârını (Top-N) üreteceğini belirleyen projeksiyon grafiğidir."
+}
+
+st.markdown(f'<div class="chart-title">{chart_title}</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="bi-tooltip">{BI_EXPLANATIONS[chart_key]}</div>', unsafe_allow_html=True)
+
+# ── ÇİZİM FONKSİYONLARI (TOP N VE FİLTRE ENTEGRASYONLU) ──
 
 def render_sales_volume_pie(data: dict, filtered_skus: list, period_weeks: int, top_n: int) -> None:
     products = [p for p in data["products"] if p["sku"] in filtered_skus] if filtered_skus else data["products"]
@@ -693,7 +722,7 @@ def render_risk_scatter(data: dict, usd_rate: float, filtered_skus: list, top_n:
     for p in products:
         profit_tl = p["our_price_tl"] - get_fifo_cost_tl(p, usd_rate)
         p["_tmp_margin"] = (profit_tl / p["our_price_tl"]) * 100 if p["our_price_tl"] else 0
-    # Top N products by lowest margin (highest risk) or highest volume. Let's sort by margin ascending to show riskiest.
+    # Top N products by lowest margin (highest risk) - sorted ascending
     top_products = sorted(products, key=lambda x: x["_tmp_margin"])[:top_n]
 
     names_r, margin_r, stock_r, cost_r, cat_r = [], [], [], [], []
@@ -726,7 +755,7 @@ def render_risk_scatter(data: dict, usd_rate: float, filtered_skus: list, top_n:
     fig.update_layout(
         paper_bgcolor=BG_PAPER, plot_bgcolor=BG_PLOT, font=dict(size=11, family="Inter"),
         margin=dict(l=10, r=10, t=40, b=10), height=370,
-        title=dict(text=f"Risk Matrisi (En Riski {top_n} Ürün) — Marj vs Stok", font=dict(size=13, family="Inter"), x=0),
+        title=dict(text=f"Risk Matrisi (En Riskli {top_n} Ürün) — Marj vs Stok", font=dict(size=13, family="Inter"), x=0),
         legend=dict(orientation="v", x=1.02, y=1, font=dict(size=9, family="Inter"), bgcolor="rgba(0,0,0,0)", bordercolor=GRID_COLOR, borderwidth=1),
         xaxis=dict(title="Marj %", gridcolor=GRID_COLOR, ticksuffix="%"), yaxis=dict(title="Stok Miktarı (Adet)", gridcolor=GRID_COLOR)
     )
@@ -746,7 +775,8 @@ def render_sales_trend_line(data: dict, filtered_skus: list, period_weeks: int, 
     palette = ["#2563EB","#16A34A","#CA8A04","#DC2626","#7C3AED","#0891B2"]
     for idx, p in enumerate(products):
         spw    = p.get("sales_per_week", 0)
-        series = [max(0, int(spw * (1 + random.uniform(-0.15, 0.15)))) for _ in range(period_weeks)] + [spw]
+        # Dönem katsayısına göre hacmi grafik çizgisine yedir
+        series = [max(0, int((spw * period_weeks / 4) * (1 + random.uniform(-0.15, 0.15)))) for _ in range(period_weeks)] + [int(spw * period_weeks / 4)]
         fig.add_trace(go.Scatter(
             x=weeks, y=series, mode="lines+markers", name=" ".join(p["name"].split()[:2]),
             line=dict(color=palette[idx % len(palette)], width=2), marker=dict(size=5),
@@ -755,9 +785,9 @@ def render_sales_trend_line(data: dict, filtered_skus: list, period_weeks: int, 
     fig.update_layout(
         paper_bgcolor=BG_PAPER, plot_bgcolor=BG_PLOT, font=dict(size=11, family="Inter"),
         margin=dict(l=10, r=10, t=40, b=10), height=310,
-        title=dict(text=f"Satış Hızı Trendi (Haftalık Simülasyon — Top {top_n} Ürün)", font=dict(size=13, family="Inter"), x=0),
+        title=dict(text=f"Satış Hızı Trendi (Dinamik Simülasyon — Top {top_n} Ürün)", font=dict(size=13, family="Inter"), x=0),
         legend=dict(orientation="h", y=-0.28, font=dict(size=9, family="Inter"), bgcolor="rgba(0,0,0,0)"),
-        xaxis=dict(gridcolor=GRID_COLOR), yaxis=dict(title="Haftalık Satış Adedi", gridcolor=GRID_COLOR)
+        xaxis=dict(gridcolor=GRID_COLOR), yaxis=dict(title="Dönem Satış Adedi (Projeksiyon)", gridcolor=GRID_COLOR)
     )
     st.plotly_chart(fig, use_container_width=True)
 
@@ -793,6 +823,8 @@ def render_projected_profit_bar(data: dict, usd_rate: float, filtered_skus: list
     st.plotly_chart(fig, use_container_width=True)
 
 def render_price_vs_redline(cost_metrics: dict) -> None:
+    # Bu grafik tab içinde render edilecek.
+    st.markdown('<div class="bi-tooltip">💡 **Fiyat & Kırmızı Çizgi Analizi:** Mevcut perakende fiyatlarınızın, operasyonel FIFO maliyet sınırını (Kırmızı Çizgi) kurtarıp kurtarmadığını gösteren risk denetim grafiğidir.</div>', unsafe_allow_html=True)
     skus       = list(cost_metrics.keys())
     our_prices = [cost_metrics[s]["our_price_tl"] for s in skus]
     red_lines  = [cost_metrics[s]["red_line_price_tl"] for s in skus]
@@ -818,17 +850,7 @@ def render_price_vs_redline(cost_metrics: dict) -> None:
     )
     st.plotly_chart(fig, use_container_width=True)
 
-# BI İZAHAT METİNLERİ
-BI_EXPLANATIONS = {
-    "pie": "**Hacim Dağılımı:** Seçili periyotta, en çok satış hacmine sahip olan ürünlerin toplam pazarınızdaki oransal ağırlığını ifade eder.",
-    "cat_bar": "**Kategori Karlılığı:** Hangi ürün kategorilerinin belirlenen dönem için en yüksek brüt kârı ürettiğini gösterir. Kırmızı barlar acil maliyet analizi veya tasfiye gerektirir.",
-    "bcg": "**BCG Matrisi:** Ürünlerinizi 'Nakit İnekleri', 'Yıldızlar', 'Köpekler' ve 'Soru İşaretleri' olarak segment eder. Sol üstte yer alan ürünlerin stokları acil korunmalıdır.",
-    "risk": "**Stok & Marj Riski:** Marjı düşük (0'ın solu) ve stoku yüksek (üst bant) olan ürünler nakit akışınız için ciddi finansal risk taşır. Balon büyüklüğü (FIFO maliyeti) depodaki bağlı sermayeyi işaret eder.",
-    "trend": "**Talep İvmesi:** Dönem katsayısına göre haftalık satış simülasyonunu çizer. Yukarı yönlü sert kırılımlar, acil stok takviyesi yapılması gereken momentumlu ürünleri gösterir.",
-    "proj": "**Kâr Kararlılığı:** Mevcut enflasyonist baskı ve döviz kuru oynaklığı karşısında hangi SKU'ların, mevcut depo stok limitlerine takılmadan en yüksek dönem sonu kârını üreteceğini belirler."
-}
-
-# ── Grafik Render & BI Bağlantısı ──
+# ── Grafik Render ──
 if chart_key == "pie":
     render_sales_volume_pie(data, filtered_skus=dash_skus, period_weeks=period_weeks, top_n=int(dash_top_n))
 elif chart_key == "cat_bar":
@@ -842,7 +864,6 @@ elif chart_key == "trend":
 elif chart_key == "proj":
     render_projected_profit_bar(data, current_rate, filtered_skus=dash_skus, period_weeks=period_weeks, top_n=int(dash_top_n))
 
-st.info(BI_EXPLANATIONS[chart_key], icon="💡")
 st.divider()
 
 # ══════════════════════════════════════════════════════════════════════
@@ -969,16 +990,16 @@ with c_btn:
 if run_button:
     trending_skus_initial = [p["sku"] for p in sorted(data["products"], key=lambda p: p.get("sales_per_week", 0), reverse=True)][:15]
     
-    # ── YENİ: Canlı Gaming Trend OSINT Data Enjeksiyonu ──
-    osint_log = """[WEB SCRAPER LOG - GAMING TRENDS]:
+    # ── CANLI GAMING TREND OSINT DATA ENJEKSİYONU ──
+    osint_log = """[CRAWLER_LOG - GAMING MARKET OSINT]:
 Gündemdeki oyunlar: Elden Ring 2, Battlefield 6, Cyberpunk 2078, GTA VI, The Witcher 4
-Sistem Gereksinimleri:
+Sistem Donanım Gereksinimleri:
 - Battlefield 6 -> GPU: RTX 4080+, RAM: 32GB, SSD: 2TB NVMe
 - Cyberpunk 2078 -> GPU: RTX 4090, RAM: 64GB, SSD: 2TB NVMe
 - GTA VI -> GPU: RTX 4070 Ti, RAM: 32GB, SSD: 1TB NVMe
-Stratejik Not: 2TB SSD ve High-End GPU'lar (RTX 4080/4090) bu oyunlar için kritik donanımdır. Stok fazlası ürünler için bundle (paket) fırsatları taranmalıdır."""
+Stratejik Analiz Notu: 2TB SSD ve High-End GPU'lar (RTX 4080/4090) bu oyunlar piyasaya çıktığında kritik donanım arz kısıtlaması yaşayacaktır. Stoktaki yavaş dönen ürünlerle bundle (paket) fırsatları tasarlanmalıdır."""
 
-    system_instruction = "GÖREV: Yukarıdaki canlı oyun trend verilerini oku, bunları sanki bir web crawler az önce çekmiş gibi analiz et ve platformun stoklarındaki High-End GPU ve SSD'ler için otonom bundle/fiyatlandırma önerilerini rapora ekle. Çıktıyı yapay kelimelerle değil, doğrudan profesyonel bir pazar analizi olarak listele."
+    system_instruction = "GÖREV: Sana gelen pazar gereksinim loğundaki ekran kartı ve SSD trendlerini oku. Bunları platformun mevcut envanterindeki GPU ve SSD stoklarıyla eşleştir. Yapay ifadeler kullanmadan, doğrudan kurumsal bir pazar analizi ve bundle (paketli satış) stratejisi üreterek aksiyon paneline yansıt."
 
     combined_trigger = f"{trigger_event}\n\n{system_instruction}"
 

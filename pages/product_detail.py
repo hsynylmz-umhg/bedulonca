@@ -140,6 +140,10 @@ a:hover { text-decoration: none !important; opacity: 0.75 !important; }
     background: rgba(128,128,128,0.1);
     opacity: 1 !important;
 }
+.custom-nav-btn.active {
+    background: rgba(37,99,235,0.10);
+    color: #2563EB !important;
+}
 
 /* ══════════════════════════════════════════════════════
    LAYER 4 — Section Labels
@@ -455,7 +459,7 @@ with col_nav:
     st.markdown("""
         <div class="navbar-menu" style="justify-content: flex-end;">
             <a href="/" target="_self" class="custom-nav-btn"><i class="fi fi-rr-home"></i> Ana Sayfa</a>
-            <a href="/product_detail" target="_self" class="custom-nav-btn"><i class="fi fi-rr-search-alt"></i> Ürün Detayı</a>
+            <a href="/product_detail" target="_self" class="custom-nav-btn active"><i class="fi fi-rr-search-alt"></i> Ürün Detayı</a>
             <a href="/settings" target="_self" class="custom-nav-btn"><i class="fi fi-rr-settings"></i> Ayarlar</a>
         </div>
     """, unsafe_allow_html=True)
