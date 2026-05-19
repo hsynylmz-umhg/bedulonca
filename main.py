@@ -257,16 +257,22 @@ BG_PAPER     = "rgba(0,0,0,0)"
 BG_PLOT      = "rgba(0,0,0,0)"
 GRID_COLOR   = "rgba(148,163,184,0.22)"
 
-def _lottie_html(url: str, height: int = 200) -> str:
-    return (
-        "<script src='https://unpkg.com/@lottiefiles/dotlottie-wc@0.9.14"
-        "/dist/dotlottie-wc.js' type='module'></script>"
-        f"<div style='display:flex;justify-content:center;"
-        f"overflow:hidden;height:{height}px;'>"
-        f"<dotlottie-wc src='{url}' autoplay loop "
-        f"style='width:{height}px;height:{height}px;'></dotlottie-wc>"
-        "</div>"
-    )
+# ── WebM Animasyon Render Fonksiyonu (YENİ) ───────────────────────────
+def render_webm_loader(file_name: str, text: str) -> str:
+    """WebM animasyonunu base64 ile yükler ve HTML döndürür."""
+    file_path = _BASE_DIR / "assets" / file_name
+    if file_path.exists():
+        with open(file_path, "rb") as f:
+            b64 = base64.b64encode(f.read()).decode()
+        return f'''
+            <div style="display:flex; align-items:center; gap:10px; padding:10px; background:rgba(128,128,128,0.05); border-radius:8px; margin-bottom:15px;">
+                <video width="40" height="40" autoplay loop muted playsinline style="background:transparent;">
+                    <source src="data:video/webm;base64,{b64}" type="video/webm">
+                </video>
+                <span style="font-family:'Inter'; font-weight:600; font-size:13px; opacity:0.8;">{text}</span>
+            </div>
+        '''
+    return f"<span style='font-family:Inter; font-size:13px; opacity:0.7;'>{text}</span>"
 
 @st.cache_resource
 def get_graph():
@@ -341,7 +347,6 @@ def build_inventory_df(data: dict, usd_rate: float) -> pd.DataFrame:
 
 def _color_row(row: pd.Series) -> list[str]:
     m = float(row.get("Marj %", row.get("_margin_raw", 0)))
-    # Renk tonları (opacity) artırıldı, daha doygun hale getirildi.
     if m < 0:
         bg = "background-color: rgba(220, 38, 38, 0.40); font-weight:600;"
     elif m < 12:
@@ -401,7 +406,7 @@ def sync_dash_children():
 # ══════════════════════════════════════════════════════════════════════
 # ① STICKY TOP NAVBAR (Pure HTML/Flexbox - No Stats, Right Aligned)
 # ══════════════════════════════════════════════════════════════════════
-_logo_path = _BASE_DIR / "img" / "logo.png"
+_logo_path = _BASE_DIR / "assets" / "logo.png"  # ← img -> assets değiştirildi
 if os.path.exists(str(_logo_path)):
     with open(_logo_path, "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read()).decode()
@@ -414,7 +419,7 @@ st.markdown(f"""
     <div class="navbar-inner">
         <div>{logo_html}</div>
         <div class="navbar-menu">
-            <a href="/main" target="_self" class="custom-nav-btn"><i class="fi fi-rr-home"></i> Ana Sayfa</a>
+            <a href="/" target="_self" class="custom-nav-btn"><i class="fi fi-rr-home"></i> Ana Sayfa</a>
             <a href="/product_detail" target="_self" class="custom-nav-btn"><i class="fi fi-rr-search-alt"></i> Ürün Detayı</a>
             <a href="/settings" target="_self" class="custom-nav-btn"><i class="fi fi-rr-settings"></i> Ayarlar</a>
         </div>
@@ -855,7 +860,7 @@ def _build_report_markdown(result: dict) -> str:
         for err in result["errors"]:
             lines.append(f"- {err}")
         lines.append("")
-    lines += ["---", "_Bu rapor Bedülonca V10.2 LangGraph + Gemini Motoru tarafından üretilmiştir._"]
+    lines += ["---", "_Bu rapor Bedülonca V10.4 LangGraph + Gemini Motoru tarafından üretilmiştir._"]
     return "\n".join(lines)
 
 def render_analysis_result(result: dict) -> None:
@@ -890,9 +895,9 @@ def render_analysis_result(result: dict) -> None:
         render_action_panel(result.get("suggested_actions", []))
 
 # ══════════════════════════════════════════════════════════════════════
-# ④ AI ANALYSIS ENGINE
+# ④ AI ANALYSIS ENGINE (WebM Animasyon Entegrasyonlu)
 # ══════════════════════════════════════════════════════════════════════
-st.markdown('<div class="section-label"><i class="fi fi-rr-brain-circuit"></i> LangGraph &amp; Gemini Karar Motoru · V10.2</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-label"><i class="fi fi-rr-brain-circuit"></i> LangGraph &amp; Gemini Karar Motoru · V10.4</div>', unsafe_allow_html=True)
 
 if st.session_state["analysis_result"] is not None:
     st.success(f"Önbelleğe alınmış analiz mevcut ({st.session_state['analysis_ran_at']}) — Yenilemek için aşağıdaki butonu kullanın.")
@@ -912,20 +917,27 @@ if run_button:
         "crawl_log": "", "market_news": "", "errors": [],
     }
 
+    # ── Animasyon Placeholder Oluştur ──
     lottie_ph = st.empty()
-    lottie_ph.markdown(_lottie_html("https://lottie.host/0b1155c1-5ac5-4d9b-8cf0-f4d15313d505/QjT0LDsqon.lottie", 250), unsafe_allow_html=True)
 
     with st.status("Analiz aşamaları:", expanded=True) as status:
+        # ── 1. Web İstihbaratı Animasyonu ──
+        lottie_ph.markdown(render_webm_loader("web_intel.webm", "Piyasa istihbaratı toplanıyor..."), unsafe_allow_html=True)
         st.write(f"Trend verileri taranıyor ({len(trending_skus_initial)} ürün)...")
         st.write("Piyasa haberleri ve rakip fiyatları çekiliyor...")
+        
+        # ── 2. AI Düşünme Animasyonu ──
+        lottie_ph.markdown(render_webm_loader("ai_thinking.webm", "Gemini V10.4 strateji motoru analiz ediyor..."), unsafe_allow_html=True)
         st.write("FIFO maliyet hesaplaması yapılıyor...")
-        st.write("Gemini V10.2 strateji motoru devreye giriyor...")
+        st.write("Gemini V10.4 strateji motoru devreye giriyor...")
 
+        # ── LangGraph Çalıştır ──
         result = get_graph().invoke(initial_state)
 
         st.session_state["analysis_result"] = result
         st.session_state["analysis_ran_at"] = datetime.now().strftime("%d.%m.%Y %H:%M")
 
+        # ── Animasyonu Temizle ──
         lottie_ph.empty()
         status.update(label="Analiz tamamlandı ve önbelleğe alındı.", state="complete", expanded=False)
 
