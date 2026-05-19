@@ -119,6 +119,6 @@ bedulonca/
 
 Sistemin otonom fiyat düzeltme, canlı kur ile FIFO hesaplama, BCG matris filtreleme ve Gemini destekli kurumsal chat operasyonlarını izlemek için:
 
-👉 **[Tanıtım Videosunu Buradan İzleyebilirsiniz (YouTube / Drive)]**
+👉 **[[Tanıtım Videosunu Buradan İzleyebilirsiniz (Drive)]](https://drive.google.com/drive/folders/1cz1EdRVGKk8LF750cQ_dll7dNwMaEjil)**
 
 ---
