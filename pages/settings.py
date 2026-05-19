@@ -1,3 +1,4 @@
+# pages/settings.py
 """
 Bedülonca V10.4 — Sistem Ayarları & Kota Paneli (Main.py / product_detail.py ile Senkron)
 """
